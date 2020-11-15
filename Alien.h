@@ -10,10 +10,11 @@ class Alien : public QGraphicsPixmapItem {
         int xCoordinate;
         int yCoordinate;
     public:
-        Alien(int id, int height, int width,int xCoordinate, int yCoordinate, QPixmap pixmap){
+        Alien();
+        Alien(int id, int xCoordinate, int yCoordinate, QPixmap pixmap){
             this->id = id;
-            this->height = height;
-            this->width = width;
+            this->height = pixmap.height();
+            this->width = pixmap.width();
             this->xCoordinate = xCoordinate;
             this->yCoordinate = yCoordinate;
             setPixmap(pixmap);
@@ -24,7 +25,9 @@ class Alien : public QGraphicsPixmapItem {
         int getHeight(){return this->height;}
         int getWidth(){return this->width;}
         int getXCoordinate(){return this->xCoordinate;}
+        void setXCoordinate(int xCoordinate){this->xCoordinate = xCoordinate;}
         int getYCoordinate(){return this->yCoordinate;};
+        void setYCoordinate(int yCoordinate){this->yCoordinate = yCoordinate;}
         void shoot();
         void hasCollided();
         void remove();

@@ -1,20 +1,52 @@
 #include "AlienFlock.h"
 #include "Alien.h"
+#include <QPixmap>
+#include <QTimer>
+#include <QTextStream>
 
 void AlienFlock::createAliens(){
-    int id = 0;
-    for(int i=0; i<5; i++){
-        Alien* alien = new Alien(id, 12, 12, i+20, i+20, QPixmap(":/img/green-alien.png"));
-        flock[i] = alien;
+    int curCol = 0, curRow = 0;
+    int aliensNumber = getRows()*getCols();
+    for(int i=0; i<getRows(); i++){
+        for(int j=0; j<getCols(); j++){
+            QPixmap pixmap = QPixmap(":/img/green-alien.png");
+            Alien* alien = new Alien(i*j+j, j*70, i*60, pixmap);
+            flock.push_back(alien);
+            scene->addItem(alien);
+        }
+    }
+
+}
+
+void AlienFlock::draw(){
+    for (auto alien : flock){
+        alien->setPos(QPointF(alien->getXCoordinate(), alien->getYCoordinate()));
+
     }
 }
 
-void AlienFlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-    int numOfAliens = (int) sizeof(flock);
-    for(int i=0; i< numOfAliens; i++){
-        flock[i]->paint(painter, option, widget);
-    }
+void AlienFlock::move(){
+    QTimer *alienFlockTimer = new QTimer(this);
+    connect(alienFlockTimer,&QTimer::timeout,[=](){
+        int dir = 20;
+        QTextStream out(stdout);
+        int curRow = 0, curCol = 0;
+        for (Alien *alien : flock){
+            if(curCol < cols){
+                if(getLeftBoarder()+dir > scene->width() || getRightBoarder()+dir < 0)
+                    dir*=-1;
+                alien->setXCoordinate(alien->getXCoordinate()+dir);
+                alien->setPos(QPointF(alien->getXCoordinate(), alien->getYCoordinate()));
+                curCol++;
+            }
+            curCol = 0;
+            curRow++;
+        }
+        draw();
+    });
+    alienFlockTimer->start(200);
 }
+
 void AlienFlock::remove(Alien* alien){
     alien->remove();
 }

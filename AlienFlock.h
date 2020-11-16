@@ -8,34 +8,23 @@ class AlienFlock : public QObject {
 private:
     std::vector <Alien*> flock;
     QGraphicsScene *scene;
+
     int rows;
     int cols;
-    int leftBoarder = 0;
-    int rightBoarder = 0;
+    int leftBorder = 800;
+    int rightBorder = 0;
 public:
-    AlienFlock(int rows, int cols, QGraphicsScene *scene){
-        this->rows = rows;
-        this->cols = cols;
-        this->scene = scene;
-        createAliens();
-        draw();
-    };
-    ~AlienFlock(){
-        for (auto alien : flock)
-           {
-                alien = nullptr;
-                alien->remove();
-           }
-           flock.clear();
-    };
+    AlienFlock(int rows, int cols, QGraphicsScene *scene);
+    ~AlienFlock();
+        int dir = 20;
     int getRows(){return rows;}
     void setRows(int rows){this->rows = rows;}
     int getCols(){return cols;}
     void setCols(int cols){this->cols = cols;}
-    int getLeftBoarder(){return leftBoarder;}
-    void setLeftBoarder(int leftBoarder){this->leftBoarder = leftBoarder;}
-    int getRightBoarder(){return rightBoarder;}
-    void setRightBoarder(int rightBoarder){this->rightBoarder = rightBoarder;}
+    int getLeftBorder(){return leftBorder;}
+    void setLeftBorder(int leftBorder){this->leftBorder = leftBorder;}
+    int getRightBorder(){return rightBorder;}
+    void setRightBorder(int rightBorder){this->rightBorder = rightBorder;}
     void createAliens();
     void draw();
     void move();

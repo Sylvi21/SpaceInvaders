@@ -4,9 +4,27 @@
 #include <QTimer>
 #include <QTextStream>
 
-void AlienFlock::createAliens(){
-    int curCol = 0, curRow = 0;
-    int aliensNumber = getRows()*getCols();
+AlienFlock::AlienFlock(int rows, int cols, QGraphicsScene *scene)
+{
+    this->rows = rows;
+    this->cols = cols;
+    this->scene = scene;
+    createAliens();
+    draw();
+};
+
+AlienFlock::~AlienFlock()
+{
+    for (auto alien : flock)
+       {
+            alien = nullptr;
+            alien->remove();
+       }
+       flock.clear();
+};
+
+void AlienFlock::createAliens()
+{
     for(int i=0; i<getRows(); i++){
         for(int j=0; j<getCols(); j++){
             QPixmap pixmap = QPixmap(":/img/green-alien.png");
@@ -15,39 +33,75 @@ void AlienFlock::createAliens(){
             scene->addItem(alien);
         }
     }
+    int width = flock.front()->getWidth();
+    int height = flock.front()->getHeight();
+    this->leftBorder = 0;
+    this->rightBorder = cols*width+(cols-1)*(70-width);
 
 }
 
-void AlienFlock::draw(){
+void AlienFlock::draw()
+{
+    int maxRight = getRightBorder(), maxLeft = getLeftBorder();
+    bool leftChanged, rightChanged = false;
+
     for (auto alien : flock){
-        alien->setPos(QPointF(alien->getXCoordinate(), alien->getYCoordinate()));
-
+        int left = alien->getXCoordinate();
+        int right = alien->getXCoordinate();
+        int down = alien->getYCoordinate();
+        alien->setPos(QPointF(left, down));
+        if(left < maxLeft)
+        {
+            left = maxLeft;
+            leftChanged = true;
+        }
+        if(right > maxRight)
+        {
+            right = maxRight;
+            rightChanged = true;
+        }
     }
+    if(leftChanged)
+        setLeftBorder(maxLeft);
+    if(rightChanged)
+        setRightBorder(maxRight);
 }
 
-void AlienFlock::move(){
+void AlienFlock::move()
+{
     QTimer *alienFlockTimer = new QTimer(this);
     connect(alienFlockTimer,&QTimer::timeout,[=](){
-        int dir = 20;
         QTextStream out(stdout);
-        int curRow = 0, curCol = 0;
+        int maxLeft = 800, maxRight = 0;
+        int counter = 0;
+        if(getRightBorder()+20 > scene->width()-30)
+            dir=-20;
+        if (getLeftBorder()-20 < 30)
+            dir = 20;
         for (Alien *alien : flock){
-            if(curCol < cols){
-                if(getLeftBoarder()+dir > scene->width() || getRightBoarder()+dir < 0)
-                    dir*=-1;
-                alien->setXCoordinate(alien->getXCoordinate()+dir);
-                alien->setPos(QPointF(alien->getXCoordinate(), alien->getYCoordinate()));
-                curCol++;
+
+            alien->setXCoordinate(alien->getXCoordinate()+dir);
+            alien->setPos(QPointF(alien->getXCoordinate(), alien->getYCoordinate()));
+
+            if(alien->getXCoordinate() < maxLeft)
+            {
+                maxLeft = alien->getXCoordinate();
             }
-            curCol = 0;
-            curRow++;
+            if(alien->getXCoordinate()+alien->getWidth() > maxRight)
+            {
+                maxRight = alien->getXCoordinate()+alien->getWidth();
+            }
+                counter++;
         }
-        draw();
+        setRightBorder(maxRight);
+        setLeftBorder(maxLeft);
+            out << getLeftBorder() << " " << getRightBorder() << " " << scene->width() << Qt::endl << Qt::endl;
     });
     alienFlockTimer->start(200);
 }
 
-void AlienFlock::remove(Alien* alien){
+void AlienFlock::remove(Alien* alien)
+{
     alien->remove();
 }
 

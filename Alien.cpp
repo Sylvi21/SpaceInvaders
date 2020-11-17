@@ -1,5 +1,5 @@
 #include "Alien.h"
-#include "Bullet.h"
+//#include "Bullet.h"
 #include "qpainter.h"
 
 void Alien::shoot(){

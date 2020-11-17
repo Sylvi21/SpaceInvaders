@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>img/green-alien.png</file>
         <file>img/spaceship.png</file>
+        <file>img/background.png</file>
+        <file>img/shoot.png</file>
+        <file>sound/music.mp3</file>
     </qresource>
 </RCC>

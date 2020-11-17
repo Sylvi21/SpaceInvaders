@@ -1,10 +1,10 @@
 #ifndef SHOOT_H
 #define SHOOT_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QObject>
 
-class Shoot: public QObject, public QGraphicsRectItem
+class Shoot: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 

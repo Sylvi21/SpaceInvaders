@@ -1,4 +1,5 @@
-QT       += core gui
+QT       += core gui \
+            multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,6 +11,7 @@ CONFIG += c++11
 
 SOURCES += \
     Alien.cpp \
+    AlienBullet.cpp \
     AlienBullet.cpp \
     AlienFlock.cpp \
     Ship.cpp \

@@ -10,7 +10,6 @@ AlienFlock::AlienFlock(int rows, int cols, QGraphicsScene *scene)
     this->cols = cols;
     this->scene = scene;
     createAliens();
-    draw();
 };
 
 AlienFlock::~AlienFlock()
@@ -38,33 +37,6 @@ void AlienFlock::createAliens()
     this->leftBorder = 0;
     this->rightBorder = cols*width+(cols-1)*(70-width);
 
-}
-
-void AlienFlock::draw()
-{
-    int maxRight = getRightBorder(), maxLeft = getLeftBorder();
-    bool leftChanged, rightChanged = false;
-
-    for (auto alien : flock){
-        int left = alien->getXCoordinate();
-        int right = alien->getXCoordinate();
-        int down = alien->getYCoordinate();
-        alien->setPos(QPointF(left, down));
-        if(left < maxLeft)
-        {
-            left = maxLeft;
-            leftChanged = true;
-        }
-        if(right > maxRight)
-        {
-            right = maxRight;
-            rightChanged = true;
-        }
-    }
-    if(leftChanged)
-        setLeftBorder(maxLeft);
-    if(rightChanged)
-        setRightBorder(maxRight);
 }
 
 void AlienFlock::move()

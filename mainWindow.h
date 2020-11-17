@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "ui_mainWindow.h"
 #include "AlienFlock.h"
+#include "Ship.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QWidget>

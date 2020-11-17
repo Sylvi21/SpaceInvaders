@@ -11,15 +11,15 @@ MainWindow::MainWindow(QWidget *parent)
     QGraphicsScene *scene = new QGraphicsScene(this);
     scene->setSceneRect(0,0,800,600);
 
+    Ship *spaceship = new Ship();
+    spaceship->setRect(0,0,100,100);
+
+    scene->addItem(spaceship);
+    spaceship->setFlag(QGraphicsItem::ItemIsFocusable);
+    spaceship->setFocus();
+
     AlienFlock *alienFlock =  new AlienFlock(3, 5, scene);
     alienFlock->move();
-
-/*
-    QGraphicsPixmapItem *pix = new QGraphicsPixmapItem(QPixmap(":/img/green-alien.png"));
-    scene->addItem(pix);
-    pix->setPos(QPointF(0,0) - QPointF(pix->boundingRect().width()/2,
-                                               pix->boundingRect().height()/2));
-*/
 
     ui->graphicsView->setScene(scene);
 

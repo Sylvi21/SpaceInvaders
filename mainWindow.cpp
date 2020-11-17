@@ -1,7 +1,7 @@
 #include "mainWindow.h"
 #include "Alien.h"
 #include <QMediaPlayer>
-#include <QAbstractScrollArea>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->graphicsView-> setBackgroundBrush(QBrush(QImage(":/img/background.png")));
     setFixedSize(800,600);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     QGraphicsScene *scene = new QGraphicsScene(this);
     scene->setSceneRect(0,0,800,600);
 
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sound/music.mp3"));
-    music->setVolume(10);
+    music->setVolume(30);
     music->play();
 
     ui->graphicsView->setScene(scene);

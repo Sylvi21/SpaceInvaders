@@ -3,6 +3,7 @@
 #include <QGraphicsScene>
 #include <QList>
 #include "Alien.h"
+#include "AlienFlock.h"
 Shoot::Shoot()
 {
    setPixmap(QPixmap(":/img/shoot.png"));
@@ -19,14 +20,15 @@ Shoot::Shoot()
 
 void Shoot::move()
 {
-    QList<QGraphicsItem *> colliding_items = collidingItems();
+    QList<QGraphicsItem *> colliding_items = this->collidingItems();
     for(int i=0, n=colliding_items.size(); i<n;i++)
     {
-        if(typeid(*(colliding_items[i]))== typeid(Alien))
+        if(typeid(*(colliding_items[i]))==typeid(Alien))
         {
+
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
-            delete colliding_items[i];
+            //delete colliding_items[i];
             delete this;
             return;
         }

@@ -10,9 +10,9 @@ Shoot::Shoot()
    timer->start(1);
    if ( y() + 100 < 0 )
    {
-  timer->stop();
-  scene()->removeItem(this);
-  this->deleteLater();
+      timer->stop();
+      scene()->removeItem(this);
+      this->deleteLater();
    }
 }
 

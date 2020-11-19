@@ -12,6 +12,7 @@ public:
     Ship(QGraphicsItem * parent=0);
 public:
     void keyPressEvent(QKeyEvent *move);
+
 };
 
 #endif // SHIP_H

@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     AlienFlock *alienFlock =  new AlienFlock(3, 5, scene);
     alienFlock->move();
 
-    QMediaPlayer * music = new QMediaPlayer();
+    QMediaPlayer *music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sound/music.mp3"));
     music->setVolume(30);
     music->play();

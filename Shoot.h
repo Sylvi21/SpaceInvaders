@@ -7,7 +7,6 @@
 class Shoot: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
-
 public:
     Shoot();
 public slots:

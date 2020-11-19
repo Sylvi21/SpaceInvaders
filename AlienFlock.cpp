@@ -3,6 +3,7 @@
 #include <QPixmap>
 #include <QTimer>
 #include <QTextStream>
+#include <QRandomGenerator>
 
 AlienFlock::AlienFlock(int rows, int cols, QGraphicsScene *scene)
 {
@@ -43,7 +44,6 @@ void AlienFlock::move()
 {
     QTimer *alienFlockTimer = new QTimer(this);
     connect(alienFlockTimer,&QTimer::timeout,[=](){
-        QTextStream out(stdout);
         int maxLeft = 800, maxRight = 0;
         int counter = 0;
         if(getRightBorder()+20 > scene->width()-30)
@@ -67,13 +67,33 @@ void AlienFlock::move()
         }
         setRightBorder(maxRight);
         setLeftBorder(maxLeft);
-            out << getLeftBorder() << " " << getRightBorder() << " " << scene->width() << Qt::endl << Qt::endl;
     });
     alienFlockTimer->start(200);
 }
 
+void AlienFlock::attack()
+{
+
+    QTimer *alienFlockShootTimer = new QTimer(this);
+    connect(alienFlockShootTimer,&QTimer::timeout,[=](){
+        QTextStream out(stdout);
+        int v = QRandomGenerator::global()->bounded(0, flock.size());
+        Alien *alien = flock.at(v);
+        AlienBullet *alienBullet = new AlienBullet(alien->getXCoordinate(), QPixmap(":/img/ab.png"));
+        scene->addItem(alienBullet);
+        out << "pew pew" << Qt::endl << Qt::endl;
+        alienBullet->move();
+    });
+    alienFlockShootTimer->start(600);
+}
+
+void AlienFlock::alienShot(Alien *alien){
+    remove(alien);
+}
+
 void AlienFlock::remove(Alien* alien)
 {
+    flock.erase(std::remove(flock.begin(), flock.end(), alien), flock.end());
     alien->remove();
 }
 

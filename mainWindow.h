@@ -5,6 +5,7 @@
 #include "ui_mainWindow.h"
 #include "AlienFlock.h"
 #include "Ship.h"
+#include "AlienBullet.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QWidget>
@@ -17,11 +18,19 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    private:
+        Ui::MainWindow *ui;
+        QGraphicsScene *scene;
+        Ship *spaceship;
+        AlienFlock *alienFlock;
+    public:
+        MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
+        void initScene();
+        void initSpaceship();
+        void initAliens();
+        void initAudio();
 
-private:
-    Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H

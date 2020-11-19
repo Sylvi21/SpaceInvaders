@@ -12,7 +12,6 @@ CONFIG += c++11
 SOURCES += \
     Alien.cpp \
     AlienBullet.cpp \
-    AlienBullet.cpp \
     AlienFlock.cpp \
     Ship.cpp \
     Shoot.cpp \
@@ -23,7 +22,6 @@ HEADERS += \
     Alien.h \
     AlienBullet.h \
     AlienFlock.h \
-    Bullet.h \
     Ship.h \
     Shoot.h \
     mainWindow.h

@@ -1,6 +1,7 @@
 #ifndef ALIENFLOCK_H
 #define ALIENFLOCK_H
 #include "Alien.h"
+#include "AlienBullet.h"
 #include <QGraphicsScene>
 #include <vector>
 
@@ -13,10 +14,14 @@ private:
     int cols;
     int leftBorder = 800;
     int rightBorder = 0;
+public slots:
+    void alienShot(Alien *alien);
+signals:
+    void bullsEye();
 public:
     AlienFlock(int rows, int cols, QGraphicsScene *scene);
     ~AlienFlock();
-        int dir = 20;
+    int dir = 20;
     int getRows(){return rows;}
     void setRows(int rows){this->rows = rows;}
     int getCols(){return cols;}
@@ -28,7 +33,7 @@ public:
     void createAliens();
     void draw();
     void move();
-    void shoot(int id);
+    void attack();
     void remove(Alien* alien);
 };
 

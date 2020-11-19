@@ -1,11 +1,15 @@
 #include "Alien.h"
-//#include "Bullet.h"
+#include "AlienBullet.h"
 #include "qpainter.h"
 
-void Alien::shoot(){
- //   Bullet *alienBullet = new Bullet();
- //   alienBullet->move();
-}
+Alien::Alien(int id, int xCoordinate, int yCoordinate, QPixmap pixmap){
+    this->id = id;
+    this->height = pixmap.height();
+    this->width = pixmap.width();
+    this->xCoordinate = xCoordinate;
+    this->yCoordinate = yCoordinate;
+    setPixmap(pixmap);
+};
 
 void Alien::remove(){
     delete this;

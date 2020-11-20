@@ -30,7 +30,5 @@ class MainWindow : public QMainWindow
         void initSpaceship();
         void initAliens();
         void initAudio();
-
-
 };
 #endif // MAINWINDOW_H

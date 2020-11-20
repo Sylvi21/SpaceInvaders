@@ -10,7 +10,6 @@ AlienFlock::AlienFlock(int rows, int cols, QGraphicsScene *scene)
     this->rows = rows;
     this->cols = cols;
     this->scene = scene;
-    createAliens();
 };
 
 AlienFlock::~AlienFlock()
@@ -28,7 +27,8 @@ void AlienFlock::createAliens()
     for(int i=0; i<getRows(); i++){
         for(int j=0; j<getCols(); j++){
             QPixmap pixmap = QPixmap(":/img/green-alien.png");
-            Alien* alien = new Alien(i*j+j, j*70, i*60, pixmap);
+            Alien* alien = new Alien(i*getCols()+j, j*70, i*60, pixmap);
+            connect(alien,&Alien::goodbye,this,&AlienFlock::alienShot);
             flock.push_back(alien);
             scene->addItem(alien);
         }
@@ -37,13 +37,13 @@ void AlienFlock::createAliens()
     int height = flock.front()->getHeight();
     this->leftBorder = 0;
     this->rightBorder = cols*width+(cols-1)*(70-width);
-
 }
 
 void AlienFlock::move()
 {
     QTimer *alienFlockTimer = new QTimer(this);
     connect(alienFlockTimer,&QTimer::timeout,[=](){
+        QTextStream out(stdout);
         int maxLeft = 800, maxRight = 0;
         int counter = 0;
         if(getRightBorder()+20 > scene->width()-30)
@@ -67,8 +67,9 @@ void AlienFlock::move()
         }
         setRightBorder(maxRight);
         setLeftBorder(maxLeft);
+
     });
-    alienFlockTimer->start(200);
+    alienFlockTimer->start(300);
 }
 
 void AlienFlock::attack()
@@ -76,24 +77,23 @@ void AlienFlock::attack()
 
     QTimer *alienFlockShootTimer = new QTimer(this);
     connect(alienFlockShootTimer,&QTimer::timeout,[=](){
-        QTextStream out(stdout);
         int v = QRandomGenerator::global()->bounded(0, flock.size());
         Alien *alien = flock.at(v);
         AlienBullet *alienBullet = new AlienBullet(alien->getXCoordinate(), QPixmap(":/img/ab.png"));
         scene->addItem(alienBullet);
-        out << "pew pew" << Qt::endl << Qt::endl;
         alienBullet->move();
     });
     alienFlockShootTimer->start(600);
 }
 
-void AlienFlock::alienShot(Alien *alien){
-    remove(alien);
-}
-
-void AlienFlock::remove(Alien* alien)
-{
-    flock.erase(std::remove(flock.begin(), flock.end(), alien), flock.end());
-    alien->remove();
+void AlienFlock::alienShot(int id){
+    QTextStream out(stdout);
+    for (std::vector<Alien*>::iterator it = flock.begin() ; it != flock.end(); ++it){
+        if((*it)->getId()+1 == id){
+            out << id << Qt::endl << Qt::endl;
+            flock.erase(it);
+            delete (*it);
+        }
+    }
 }
 

@@ -15,9 +15,7 @@ private:
     int leftBorder = 800;
     int rightBorder = 0;
 public slots:
-    void alienShot(Alien *alien);
-signals:
-    void bullsEye();
+    void alienShot(int id);
 public:
     AlienFlock(int rows, int cols, QGraphicsScene *scene);
     ~AlienFlock();

@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     initAliens();
     initAudio();
 
+
     ui->graphicsView->setScene(scene);
 
 }
@@ -43,6 +44,7 @@ void MainWindow::initSpaceship(){
 
 void MainWindow::initAliens(){
     alienFlock =  new AlienFlock(3, 5, scene);
+    alienFlock->createAliens();
     alienFlock->move();
     alienFlock->attack();
 }

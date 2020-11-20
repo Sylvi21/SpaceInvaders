@@ -11,6 +11,10 @@ Alien::Alien(int id, int xCoordinate, int yCoordinate, QPixmap pixmap){
     setPixmap(pixmap);
 };
 
+void Alien::dying(){
+    emit goodbye(this->getId());
+}
+
 void Alien::remove(){
     delete this;
 }

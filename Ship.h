@@ -8,9 +8,12 @@
 
 class Ship:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
+private: int xCoordinate;
 public:
-    Ship(QGraphicsItem * parent=0);
+    Ship();
 public:
+    int getXCoordinate(){return this->xCoordinate;}
+    void setXCoordinate(int xCoordinate){this->xCoordinate = xCoordinate;}
     void keyPressEvent(QKeyEvent *move);
 };
 

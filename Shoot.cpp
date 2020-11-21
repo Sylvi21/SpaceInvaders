@@ -1,28 +1,41 @@
 #include "Shoot.h"
 #include <QTimer>
 #include <QGraphicsScene>
-Shoot::Shoot()
+#include "Alien.h"
+
+Shoot::Shoot(int x)
 {
+   this->xCoordinate = x;
    setPixmap(QPixmap(":/img/shoot.png"));
-   QTimer * timer = new QTimer(this);
-
-   connect(timer, SIGNAL(timeout()),this,SLOT(move()));
-   timer->start(1);
-   if ( y() + 100 < 0 )
-   {
-      timer->stop();
-      scene()->removeItem(this);
-      this->deleteLater();
-   }
+   setPos(this->xCoordinate, 600);
 }
 
-void Shoot::move()
-{
 
-   setPos(x(),y()-1);
-   if(pos().y()<0)
-   {
-       scene()->removeItem(this);
-       delete this;
-   }
+void Shoot::move(){
+    QTimer *shootTimer = new QTimer(this);
+    connect(shootTimer,&QTimer::timeout,[=](){
+        if(this->y() > 0){
+            setPos(QPointF(getXCoordinate(), this->y()-1));
+            checkForCollision();
+        } else{
+            delete this;
+        }
+    });
+    shootTimer->start(3);
 }
+
+void Shoot::checkForCollision(){
+    QList<QGraphicsItem *> collidingItems = this->collidingItems() ;
+
+    foreach(QGraphicsItem *item, collidingItems)
+    {
+        Alien *alien = dynamic_cast<Alien *>(item);
+        if (alien)
+        {
+            alien->dying();
+            delete this;
+
+        }
+    }
+}
+

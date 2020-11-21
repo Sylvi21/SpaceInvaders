@@ -2,8 +2,8 @@
 #include "Shoot.h"
 #include <QKeyEvent>
 #include <QGraphicsScene>
-Ship::Ship(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
-
+Ship::Ship(){
+    this->xCoordinate = 300;
 }
 
 void Ship::keyPressEvent(QKeyEvent *reaction)
@@ -18,10 +18,10 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
     }
     else if(reaction->key() == Qt::Key_Space)
     {
-        Shoot * shoot = new Shoot();
-        shoot->setPos(x()+40,y()-30);
+        Shoot *shoot = new Shoot(this->getXCoordinate());
         scene()->addItem(shoot);
-       }
+        shoot->move();
+    }
 
 }
 

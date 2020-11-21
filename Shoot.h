@@ -3,15 +3,19 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
+#include "AlienFlock.h"
 
 class Shoot: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
-
+private:
+    int xCoordinate;
 public:
-    Shoot();
-public slots:
+    Shoot(int x);
+    void setXCoordinate(int xCoordinate){this->xCoordinate = xCoordinate;};
+    int getXCoordinate(){return xCoordinate;};
     void move();
+    void checkForCollision();
 };
 
 #endif // SHOOT_H

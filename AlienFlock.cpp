@@ -96,4 +96,3 @@ void AlienFlock::alienShot(int id){
         }
     }
 }
-

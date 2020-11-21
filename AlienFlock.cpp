@@ -93,6 +93,7 @@ void AlienFlock::alienShot(int id){
             out << id << Qt::endl << Qt::endl;
             delete (*it);
             flock.erase(it);
+            return;
         }
     }
 }

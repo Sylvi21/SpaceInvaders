@@ -25,7 +25,7 @@ void Shoot::move(){
             delete this;
         }
     });
-    shootTimer->start(3);
+    shootTimer->start(1);
 }
 
 void Shoot::checkForCollision(){

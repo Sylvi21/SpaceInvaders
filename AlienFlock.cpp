@@ -51,23 +51,23 @@ void AlienFlock::move()
         if (getLeftBorder()-20 < 30)
             dir = 20;
         for (Alien *alien : flock){
+            if(alien != NULL){
+                alien->setXCoordinate(alien->getXCoordinate()+dir);
+                alien->setPos(QPointF(alien->getXCoordinate(), alien->getYCoordinate()));
 
-            alien->setXCoordinate(alien->getXCoordinate()+dir);
-            alien->setPos(QPointF(alien->getXCoordinate(), alien->getYCoordinate()));
-
-            if(alien->getXCoordinate() < maxLeft)
-            {
-                maxLeft = alien->getXCoordinate();
+                if(alien->getXCoordinate() < maxLeft)
+                {
+                    maxLeft = alien->getXCoordinate();
+                }
+                if(alien->getXCoordinate()+alien->getWidth() > maxRight)
+                {
+                    maxRight = alien->getXCoordinate()+alien->getWidth();
+                }
+                    counter++;
             }
-            if(alien->getXCoordinate()+alien->getWidth() > maxRight)
-            {
-                maxRight = alien->getXCoordinate()+alien->getWidth();
-            }
-                counter++;
         }
         setRightBorder(maxRight);
         setLeftBorder(maxLeft);
-
     });
     alienFlockTimer->start(300);
 }
@@ -88,11 +88,11 @@ void AlienFlock::attack()
 
 void AlienFlock::alienShot(int id){
     QTextStream out(stdout);
-    for (std::vector<Alien*>::iterator it = flock.begin() ; it != flock.end(); ++it){
-        if((*it)->getId()+1 == id){
+    for (std::vector<Alien*>::iterator it = flock.begin(); it != flock.end(); ++it){
+        if((*it)->getId() == id){
             out << id << Qt::endl << Qt::endl;
-            flock.erase(it);
             delete (*it);
+            flock.erase(it);
         }
     }
 }

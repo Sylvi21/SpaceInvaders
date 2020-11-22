@@ -9,7 +9,6 @@ class AlienFlock : public QObject {
 private:
     std::vector <Alien*> flock;
     QGraphicsScene *scene;
-
     int rows;
     int cols;
     int leftBorder = 800;

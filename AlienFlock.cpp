@@ -74,6 +74,7 @@ void AlienFlock::move()
 
 void AlienFlock::attack()
 {
+    QTimer *alienFlockShootTimer = new QTimer(this);
     alienFlockShootTimer = new QTimer(this);
     connect(alienFlockShootTimer,&QTimer::timeout,[=](){
         if(!flock.empty()){

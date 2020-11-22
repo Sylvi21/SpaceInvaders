@@ -74,14 +74,15 @@ void AlienFlock::move()
 
 void AlienFlock::attack()
 {
-
-    QTimer *alienFlockShootTimer = new QTimer(this);
+    alienFlockShootTimer = new QTimer(this);
     connect(alienFlockShootTimer,&QTimer::timeout,[=](){
-        int v = QRandomGenerator::global()->bounded(0, flock.size());
-        Alien *alien = flock.at(v);
-        AlienBullet *alienBullet = new AlienBullet(alien->getXCoordinate(), QPixmap(":/img/ab.png"));
-        scene->addItem(alienBullet);
-        alienBullet->move();
+        if(!flock.empty()){
+            int v = QRandomGenerator::global()->bounded(0, flock.size());
+            Alien *alien = flock.at(v);
+            AlienBullet *alienBullet = new AlienBullet(alien->getXCoordinate(), QPixmap(":/img/ab.png"));
+            scene->addItem(alienBullet);
+            alienBullet->move();
+        }
     });
     alienFlockShootTimer->start(600);
 }

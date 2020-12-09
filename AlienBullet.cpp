@@ -1,6 +1,6 @@
 #include "AlienBullet.h"
 #include "Ship.h"
-
+#include "Barrier.h"
 AlienBullet::AlienBullet(int xCoordinate, QPixmap bulletImg){
     this->xCoordinate = xCoordinate;
     setPixmap(bulletImg);
@@ -25,11 +25,18 @@ void AlienBullet::checkForCollision(){
     foreach(QGraphicsItem *item, collidingItems)
     {
         Ship *ship= dynamic_cast<Ship *>(item);
+        Barrier *barrier= dynamic_cast<Barrier *>(item);
+
         if (ship)
         {
            // ship->decreaseHealth();
             delete this;
 
+        }
+
+        if(barrier)
+        {
+            delete this;
         }
     }
 }

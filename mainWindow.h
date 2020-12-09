@@ -6,6 +6,8 @@
 #include "AlienFlock.h"
 #include "Ship.h"
 #include "AlienBullet.h"
+#include "Score.h"
+#include "Barrier.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QWidget>
@@ -23,6 +25,9 @@ class MainWindow : public QMainWindow
         QGraphicsScene *scene;
         Ship *spaceship;
         AlienFlock *alienFlock;
+        Score *score;
+        Barrier *barrier;
+        Barrier *barrier2;
     public:
         MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
@@ -30,5 +35,8 @@ class MainWindow : public QMainWindow
         void initSpaceship();
         void initAliens();
         void initAudio();
+        void initScore();
+        void initBarrier();
+
 };
 #endif // MAINWINDOW_H

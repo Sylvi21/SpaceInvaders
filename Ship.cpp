@@ -2,6 +2,8 @@
 #include "Shoot.h"
 #include <QKeyEvent>
 #include <QGraphicsScene>
+#include <QMediaPlayer>
+
 Ship::Ship(){
     this->xCoordinate = 390;
 }

@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include "AlienFlock.h"
+#include "Score.h"
 
 class Shoot: public QObject, public QGraphicsPixmapItem
 {

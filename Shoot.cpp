@@ -2,10 +2,8 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include "Alien.h"
-#include "Ship.h"
-
-
-
+#include "Barrier.h"
+#include "Score.h"
 Shoot::Shoot(int x)
 {
    this->xCoordinate = x;
@@ -25,20 +23,24 @@ void Shoot::move(){
             delete this;
         }
     });
-    shootTimer->start(1);
+    shootTimer->start(2);
 }
 
 void Shoot::checkForCollision(){
-    QList<QGraphicsItem *> collidingItems = this->collidingItems() ;
-
+    QList<QGraphicsItem *> collidingItems = this->collidingItems();
     foreach(QGraphicsItem *item, collidingItems)
     {
         Alien *alien = dynamic_cast<Alien *>(item);
+        Barrier *barrier = dynamic_cast<Barrier *>(item);
+
         if (alien)
         {
             alien->dying();
             delete this;
-
+        }
+        if(barrier)
+        {
+            delete this;
         }
     }
 }

@@ -8,5 +8,7 @@
         <file>img/background.png</file>
         <file>img/barrier.png</file>
         <file>sound/shoot.mp3</file>
+        <file>img/ms-orb.png</file>
+        <file>img/shield-orb.png</file>
     </qresource>
 </RCC>

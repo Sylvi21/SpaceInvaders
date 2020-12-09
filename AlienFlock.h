@@ -2,6 +2,8 @@
 #define ALIENFLOCK_H
 #include "Alien.h"
 #include "AlienBullet.h"
+#include "ShieldBuff.h"
+#include "MultishootBuff.h"
 #include <QGraphicsScene>
 #include <vector>
 
@@ -31,6 +33,7 @@ public:
     void draw();
     void move();
     void attack();
+    void generateBuffs(int x, int y);
     void remove(Alien* alien);
 };
 

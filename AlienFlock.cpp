@@ -93,9 +93,23 @@ void AlienFlock::alienShot(int id){
     for (std::vector<Alien*>::iterator it = flock.begin(); it != flock.end(); ++it){
         if((*it)->getId() == id){
             out << id << Qt::endl << Qt::endl;
+            generateBuffs((*it)->x(), (*it)->y());
             delete (*it);
             flock.erase(it);
             return;
         }
     }
+}
+
+void AlienFlock::generateBuffs(int x, int y){
+    int v = QRandomGenerator::global()->bounded(0, 10);
+    if(v == 0){
+        ShieldBuff *shieldBuff = new ShieldBuff(x, y);
+        scene->addItem(shieldBuff);
+        shieldBuff->move();
+    } else if (v == 1){
+        MultishootBuff *multishootBuff = new MultishootBuff(x, y);
+        scene->addItem(multishootBuff);
+        multishootBuff->move();
+    } else return;
 }

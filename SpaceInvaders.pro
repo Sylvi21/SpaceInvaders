@@ -14,6 +14,7 @@ SOURCES += \
     AlienBullet.cpp \
     AlienFlock.cpp \
     Barrier.cpp \
+    Level.cpp \
     MultishootBuff.cpp \
     Score.cpp \
     ShieldBuff.cpp \
@@ -27,6 +28,8 @@ HEADERS += \
     AlienBullet.h \
     AlienFlock.h \
     Barrier.h \
+    Level.h \
+    LevelState.h \
     MultishootBuff.h \
     Score.h \
     ShieldBuff.h \

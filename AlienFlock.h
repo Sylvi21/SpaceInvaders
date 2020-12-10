@@ -15,12 +15,14 @@ private:
     int cols;
     int leftBorder = 800;
     int rightBorder = 0;
+    bool empty = false;
 public slots:
     void alienShot(int id);
 public:
     AlienFlock(int rows, int cols, QGraphicsScene *scene);
     ~AlienFlock();
     int dir = 20;
+    bool isEmpty();
     int getRows(){return rows;}
     void setRows(int rows){this->rows = rows;}
     int getCols(){return cols;}

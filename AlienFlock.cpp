@@ -96,6 +96,8 @@ void AlienFlock::alienShot(int id){
             generateBuffs((*it)->x(), (*it)->y());
             delete (*it);
             flock.erase(it);
+            if(flock.empty())
+                this->empty = true;
             return;
         }
     }
@@ -112,4 +114,8 @@ void AlienFlock::generateBuffs(int x, int y){
         scene->addItem(multishootBuff);
         multishootBuff->move();
     } else return;
+}
+
+bool AlienFlock::isEmpty(){
+    return empty;
 }

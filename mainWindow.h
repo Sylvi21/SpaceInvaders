@@ -11,6 +11,10 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QWidget>
+#include "Alien.h"
+#include <QMediaPlayer>
+#include "Level.h"
+#include "LevelState.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,15 +32,18 @@ class MainWindow : public QMainWindow
         Score *score;
         Barrier *barrier;
         Barrier *barrier2;
+        Level *currentLevel;
+
+        int levelNumber = 0;
     public:
         MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
         void initScene();
         void initSpaceship();
-        void initAliens();
         void initAudio();
         void initScore();
         void initBarrier();
+        void play();
 
 };
 #endif // MAINWINDOW_H

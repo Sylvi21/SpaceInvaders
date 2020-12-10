@@ -1,7 +1,5 @@
 #include "mainWindow.h"
-#include "Alien.h"
-#include <QMediaPlayer>
-
+#include <QDeadlineTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,13 +13,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     initScene();
     initSpaceship();
-    initAliens();
+  //  initAliens();
     initAudio();
     initScore();
     initBarrier();
 
 
     ui->graphicsView->setScene(scene);
+    play();
 
 }
 
@@ -44,13 +43,6 @@ void MainWindow::initSpaceship(){
     scene->addItem(spaceship);
 }
 
-void MainWindow::initAliens(){
-    alienFlock =  new AlienFlock(3, 5, scene);
-    alienFlock->createAliens();
-    alienFlock->move();
-    alienFlock->attack();
-}
-
 void MainWindow::initAudio(){
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sound/music.mp3"));
@@ -66,7 +58,7 @@ void MainWindow::initScore()
     //score->checkForScore();
 }
 
-void::MainWindow::initBarrier()
+void MainWindow::initBarrier()
 {
     barrier = new Barrier();
     barrier2 = new Barrier();
@@ -77,4 +69,85 @@ void::MainWindow::initBarrier()
     scene->addItem(barrier);
     scene->addItem(barrier2);
 }
+
+void MainWindow::play(){
+  //  int levelNumber = 0;
+    alienFlock =  new AlienFlock(3, 5, scene);
+    currentLevel = new Level(alienFlock, spaceship, scene);
+    currentLevel->play();
+    QTimer *alienFlockTimer = new QTimer(this);
+    connect(alienFlockTimer,&QTimer::timeout,[=](){
+        QTextStream out(stdout);
+        out<<"Loopie"<<Qt::endl;
+        if (currentLevel->getState() == LevelState::WON)
+        {
+            delete currentLevel;
+            levelNumber++;
+            switch(levelNumber)
+            {
+                case 1: {
+                    alienFlock =  new AlienFlock(3, 5, scene);
+                    currentLevel = new Level(alienFlock, spaceship, scene);
+                    currentLevel->play();
+                    break;
+                }
+                case 2: {
+                    alienFlock =  new AlienFlock(4, 6, scene);
+                    currentLevel = new Level(alienFlock, spaceship, scene);
+                    currentLevel->play();
+                    break;
+                }
+                case 3: {
+                    alienFlock =  new AlienFlock(5, 7, scene);
+                    currentLevel = new Level(alienFlock, spaceship, scene);
+                    currentLevel->play();
+                    break;
+                }
+
+            }
+        }
+    });
+    alienFlockTimer->start(1000);
+  /*  while(true)
+    {
+        if (currentLevel->getState() == LevelState::WON)
+        {
+            delete currentLevel;
+            levelNumber++;
+            switch(levelNumber)
+            {
+                case 1: {
+                    alienFlock =  new AlienFlock(3, 5, scene);
+                    currentLevel = new Level(alienFlock, spaceship, scene);
+                    break;
+                }
+                case 2: {
+                    alienFlock =  new AlienFlock(4, 6, scene);
+                    currentLevel = new Level(alienFlock, spaceship, scene);
+                    break;
+                }
+                case 3: {
+                    alienFlock =  new AlienFlock(5, 7, scene);
+                    currentLevel = new Level(alienFlock, spaceship, scene);
+                    break;
+                }
+
+            }
+        }
+    }*/
+}
+  /*  alienFlock =  new AlienFlock(3, 5, scene);
+    Level *firstLevel = new Level(alienFlock, spaceship, scene);
+    firstLevel->setState(LevelState::RUNNING);
+    QDeadlineTimer deadline(20000);
+    while(firstLevel->getState() == LevelState::RUNNING && !deadline.hasExpired()){
+
+    }
+    if(firstLevel->getState() == LevelState::WON && !deadline.hasExpired()){
+        delete firstLevel;
+        QDeadlineTimer deadline(20000);
+        alienFlock =  new AlienFlock(4, 6, scene);
+        Level *secondLevel = new Level(alienFlock, spaceship, scene);
+        secondLevel->setState(LevelState::RUNNING);
+    } else return;*/
 

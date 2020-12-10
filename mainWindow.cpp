@@ -58,10 +58,12 @@ void MainWindow::initAudio(){
     music->play();
 }
 
+
 void MainWindow::initScore()
 {
     score = new Score();
     scene->addItem(score);
+    //score->checkForScore();
 }
 
 void::MainWindow::initBarrier()

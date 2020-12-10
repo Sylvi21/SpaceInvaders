@@ -1,9 +1,8 @@
 #include "Shoot.h"
 #include <QTimer>
-#include <QGraphicsScene>
+#include "mainWindow.h"
 #include "Alien.h"
 #include "Barrier.h"
-#include "Score.h"
 Shoot::Shoot(int x)
 {
    this->xCoordinate = x;
@@ -32,7 +31,6 @@ void Shoot::checkForCollision(){
     {
         Alien *alien = dynamic_cast<Alien *>(item);
         Barrier *barrier = dynamic_cast<Barrier *>(item);
-
         if (alien)
         {
             alien->dying();

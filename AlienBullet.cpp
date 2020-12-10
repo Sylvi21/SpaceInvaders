@@ -28,7 +28,7 @@ void AlienBullet::checkForCollision(){
 
         if (ship)
         {
-           // ship->decreaseHealth();
+            ship->decreaseHealth();
             delete this;
 
         }

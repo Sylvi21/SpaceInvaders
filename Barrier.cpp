@@ -1,7 +1,6 @@
 #include "Barrier.h"
 #include "AlienBullet.h"
 #include <QTimer>
-#include <QDebug>
 Barrier::Barrier()
 {
     durability = 5;
@@ -9,7 +8,6 @@ Barrier::Barrier()
 
 void Barrier::decreaseDurability(){
     durability--;
-    qDebug()<<"decreased";
     if(durability==0)
     {
         delete this;

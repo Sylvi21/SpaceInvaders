@@ -14,7 +14,7 @@ void Score::increaseScore(){
 }
 
 void checkForScore(){
-//connect
+// connect
 }
 
 int Score::getScore(){

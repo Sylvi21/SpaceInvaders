@@ -36,6 +36,7 @@ void AlienBullet::checkForCollision(){
 
         if(barrier)
         {
+            barrier->decreaseDurability();
             delete this;
         }
     }

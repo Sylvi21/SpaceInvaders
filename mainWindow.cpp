@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/img/background.png")));
-    setFixedSize(800,600);
+    setFixedSize(1200,800);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -31,7 +31,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::initScene(){
     scene = new QGraphicsScene(this);
-    scene->setSceneRect(0,0,800,600);
+    scene->setSceneRect(0,0,1200,800);
 }
 
 void MainWindow::initSpaceship(){
@@ -46,7 +46,7 @@ void MainWindow::initSpaceship(){
 void MainWindow::initAudio(){
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sound/music.mp3"));
-    music->setVolume(30);
+    music->setVolume(20);
     music->play();
 }
 
@@ -72,7 +72,7 @@ void MainWindow::initBarrier()
 
 void MainWindow::play(){
   //  int levelNumber = 0;
-    alienFlock =  new AlienFlock(3, 5, scene);
+    alienFlock =  new AlienFlock(scene);
     currentLevel = new Level(alienFlock, spaceship, scene);
     currentLevel->play();
     QTimer *alienFlockTimer = new QTimer(this);
@@ -86,19 +86,19 @@ void MainWindow::play(){
             switch(levelNumber)
             {
                 case 1: {
-                    alienFlock =  new AlienFlock(3, 5, scene);
+                    alienFlock =  new AlienFlock(scene);
                     currentLevel = new Level(alienFlock, spaceship, scene);
                     currentLevel->play();
                     break;
                 }
                 case 2: {
-                    alienFlock =  new AlienFlock(4, 6, scene);
+                    alienFlock =  new AlienFlock(scene);
                     currentLevel = new Level(alienFlock, spaceship, scene);
                     currentLevel->play();
                     break;
                 }
                 case 3: {
-                    alienFlock =  new AlienFlock(5, 7, scene);
+                    alienFlock =  new AlienFlock(scene);
                     currentLevel = new Level(alienFlock, spaceship, scene);
                     currentLevel->play();
                     break;
@@ -108,46 +108,4 @@ void MainWindow::play(){
         }
     });
     alienFlockTimer->start(1000);
-  /*  while(true)
-    {
-        if (currentLevel->getState() == LevelState::WON)
-        {
-            delete currentLevel;
-            levelNumber++;
-            switch(levelNumber)
-            {
-                case 1: {
-                    alienFlock =  new AlienFlock(3, 5, scene);
-                    currentLevel = new Level(alienFlock, spaceship, scene);
-                    break;
-                }
-                case 2: {
-                    alienFlock =  new AlienFlock(4, 6, scene);
-                    currentLevel = new Level(alienFlock, spaceship, scene);
-                    break;
-                }
-                case 3: {
-                    alienFlock =  new AlienFlock(5, 7, scene);
-                    currentLevel = new Level(alienFlock, spaceship, scene);
-                    break;
-                }
-
-            }
-        }
-    }*/
 }
-  /*  alienFlock =  new AlienFlock(3, 5, scene);
-    Level *firstLevel = new Level(alienFlock, spaceship, scene);
-    firstLevel->setState(LevelState::RUNNING);
-    QDeadlineTimer deadline(20000);
-    while(firstLevel->getState() == LevelState::RUNNING && !deadline.hasExpired()){
-
-    }
-    if(firstLevel->getState() == LevelState::WON && !deadline.hasExpired()){
-        delete firstLevel;
-        QDeadlineTimer deadline(20000);
-        alienFlock =  new AlienFlock(4, 6, scene);
-        Level *secondLevel = new Level(alienFlock, spaceship, scene);
-        secondLevel->setState(LevelState::RUNNING);
-    } else return;*/
-

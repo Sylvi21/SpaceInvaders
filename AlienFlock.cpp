@@ -1,14 +1,17 @@
 #include "AlienFlock.h"
 #include "Alien.h"
+#include "EasyAlien.h"
+#include "MediumAlien.h"
+#include "HardAlien.h"
 #include <QPixmap>
 #include <QTimer>
 #include <QTextStream>
 #include <QRandomGenerator>
 
-AlienFlock::AlienFlock(int rows, int cols, QGraphicsScene *scene)
+AlienFlock::AlienFlock(QGraphicsScene *scene)
 {
-    this->rows = rows;
-    this->cols = cols;
+    this->rows = 5;
+    this->cols = 8;
     this->scene = scene;
 };
 
@@ -22,22 +25,59 @@ AlienFlock::~AlienFlock()
        flock.clear();
 };
 
+
 void AlienFlock::createAliens()
 {
     for(int i=0; i<getRows(); i++){
+        QPixmap pixmap;
+        Alien* alien;
+        if(i == 0)
+            pixmap = QPixmap(":/img/cyan-alien.png");
+                else if(i == 1 || i == 2)
+            pixmap = QPixmap(":/img/green-alien.png");
+        else
+            pixmap = QPixmap(":/img/yellow-alien.png");
+
+
         for(int j=0; j<getCols(); j++){
-            QPixmap pixmap = QPixmap(":/img/green-alien.png");
-            Alien* alien = new Alien(i*getCols()+j, j*70, i*60, pixmap);
+            if(i == 0)
+                alien = new HardAlien(i*getCols()+j, pixmap);
+            else if(i == 1 || i == 2)
+                alien = new MediumAlien(i*getCols()+j, pixmap);
+            else
+                alien = new EasyAlien(i*getCols()+j, pixmap);
+
+            alien->setPos(j*70, i*60);
             connect(alien,&Alien::goodbye,this,&AlienFlock::alienShot);
             flock.push_back(alien);
             scene->addItem(alien);
         }
     }
-    int width = flock.front()->getWidth();
-    int height = flock.front()->getHeight();
+    int width = 50;
+    int height = 34;
     this->leftBorder = 0;
     this->rightBorder = cols*width+(cols-1)*(70-width);
 }
+
+/*
+void AlienFlock::createAliens()
+{
+    for(int i=0; i<getRows(); i++){
+        for(int j=0; j<getCols(); j++){
+            QPixmap pixmap = QPixmap(":/img/green-alien.png");
+            Alien* alien = new Alien(i*getCols()+j, pixmap);
+            alien->setPos(j*70, i*60);
+            connect(alien,&Alien::goodbye,this,&AlienFlock::alienShot);
+            flock.push_back(alien);
+            scene->addItem(alien);
+        }
+    }
+    int width = 50;
+    int height = 34;
+    this->leftBorder = 0;
+    this->rightBorder = cols*width+(cols-1)*(70-width);
+}
+*/
 
 void AlienFlock::move()
 {
@@ -52,16 +92,16 @@ void AlienFlock::move()
             dir = 20;
         for (Alien *alien : flock){
             if(alien != NULL){
-                alien->setXCoordinate(alien->getXCoordinate()+dir);
-                alien->setPos(QPointF(alien->getXCoordinate(), alien->getYCoordinate()));
+                alien->setX(alien->x()+dir);
+                alien->setPos(QPointF(alien->x(), alien->y()));
 
-                if(alien->getXCoordinate() < maxLeft)
+                if(alien->x() < maxLeft)
                 {
-                    maxLeft = alien->getXCoordinate();
+                    maxLeft = alien->x();
                 }
-                if(alien->getXCoordinate()+alien->getWidth() > maxRight)
+                if(alien->x() + alien->getWidth() > maxRight)
                 {
-                    maxRight = alien->getXCoordinate()+alien->getWidth();
+                    maxRight = alien->x() + alien->getWidth();
                 }
                     counter++;
             }
@@ -80,7 +120,8 @@ void AlienFlock::attack()
         if(!flock.empty()){
             int v = QRandomGenerator::global()->bounded(0, flock.size());
             Alien *alien = flock.at(v);
-            AlienBullet *alienBullet = new AlienBullet(alien->getXCoordinate(), QPixmap(":/img/ab.png"));
+            AlienBullet *alienBullet = new AlienBullet(QPixmap(":/img/ab.png"));
+            alienBullet->setPos(alien->x(), alien->y());
             scene->addItem(alienBullet);
             alienBullet->move();
         }

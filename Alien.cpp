@@ -2,12 +2,8 @@
 #include "AlienBullet.h"
 #include "qpainter.h"
 
-Alien::Alien(int id, int xCoordinate, int yCoordinate, QPixmap pixmap){
+Alien::Alien(int id, QPixmap pixmap){
     this->id = id;
-    this->height = pixmap.height();
-    this->width = pixmap.width();
-    this->xCoordinate = xCoordinate;
-    this->yCoordinate = yCoordinate;
     setPixmap(pixmap);
 };
 

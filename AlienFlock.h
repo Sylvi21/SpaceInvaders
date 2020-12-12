@@ -19,7 +19,7 @@ private:
 public slots:
     void alienShot(int id);
 public:
-    AlienFlock(int rows, int cols, QGraphicsScene *scene);
+    AlienFlock(QGraphicsScene *scene);
     ~AlienFlock();
     int dir = 20;
     bool isEmpty();

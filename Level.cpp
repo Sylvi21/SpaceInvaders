@@ -44,8 +44,4 @@ void Level::play(){
 
     });
     levelTimer->start(1000);
- /*   while(!flock->isEmpty()){
-        out<<flock->isEmpty()<<Qt::endl;
-    }
-    this->setState(LevelState::WON);*/
 }

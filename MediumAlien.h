@@ -11,7 +11,7 @@ class MediumAlien : public Alien {
 
     public:
         MediumAlien();
-        MediumAlien(int id, QPixmap pixmap);
+        MediumAlien(int id);
         int getWidth(){return 46;}
         void dying();
         signals:

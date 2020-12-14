@@ -1,9 +1,11 @@
 #include "Alien.h"
 #include "AlienBullet.h"
 
-Alien::Alien(int id, QPixmap pixmap){
+Alien::Alien() {
+}
+
+Alien::Alien(int id){
     this->id = id;
-    setPixmap(pixmap);
 };
 
 void Alien::dying(){

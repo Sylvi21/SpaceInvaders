@@ -1,7 +1,6 @@
 #ifndef ALIENBULLET_H
 #define ALIENBULLET_H
 #include "Alien.h"
-#include "AlienFlock.h"
 #include "Ship.h"
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>

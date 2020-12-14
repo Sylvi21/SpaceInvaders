@@ -1,8 +1,8 @@
 #include "EasyAlien.h"
 
-EasyAlien::EasyAlien(int id, QPixmap pixmap) :
-    Alien(id, pixmap){
+EasyAlien::EasyAlien(int id) :
+    Alien(id){
     this->id = id;
     this->points = 10;
-    setPixmap(pixmap);
+    setPixmap(QPixmap(":/img/yellow-alien.png"));
 };

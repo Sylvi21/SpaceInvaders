@@ -11,7 +11,7 @@ class HardAlien : public Alien {
 
     public:
         HardAlien();
-        HardAlien(int id, QPixmap pixmap);
+        HardAlien(int id);
         int getWidth(){return 50;}
         void dying();
         signals:

@@ -10,7 +10,7 @@ class Alien : public QObject, public QGraphicsPixmapItem {
         int points;
     public:
         Alien();
-        Alien(int id, QPixmap pixmap);
+        Alien(int id);
         int getWidth(){return 50;}
         int getId(){return this->id;}
         void setId(int id);

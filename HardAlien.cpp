@@ -1,8 +1,8 @@
 #include "HardAlien.h"
 
-HardAlien::HardAlien(int id, QPixmap pixmap) :
-    Alien(id, pixmap){
+HardAlien::HardAlien(int id) :
+    Alien(id){
     this->id = id;
     this->points = 30;
-    setPixmap(pixmap);
+    setPixmap(QPixmap(":/img/cyan-alien.png"));
 };

@@ -7,11 +7,15 @@ class EasyAlien : public Alien {
     private:
         int id;
         int shotDamage;
+        int points;
 
     public:
         EasyAlien();
         EasyAlien(int id, QPixmap pixmap);
         int getWidth(){return 34;}
+        void dying();
+        signals:
+            void goodbye(int alienId);
 };
 
 #endif // EASYALIEN_H

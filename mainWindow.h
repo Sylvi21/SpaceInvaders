@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "ui_mainWindow.h"
-#include "AlienFlock.h"
 #include "Ship.h"
 #include "AlienBullet.h"
 #include "Score.h"
@@ -15,6 +14,9 @@
 #include <QMediaPlayer>
 #include "Level.h"
 #include "LevelState.h"
+#include "EasyLevel.h"
+#include "MediumLevel.h"
+#include "HardLevel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,12 +30,8 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         QGraphicsScene *scene;
         Ship *spaceship;
-        AlienFlock *alienFlock;
         Score *score;
-        Barrier *barrier;
-        Barrier *barrier2;
         Level *currentLevel;
-
         int levelNumber = 0;
     public:
         MainWindow(QWidget *parent = nullptr);
@@ -42,7 +40,6 @@ class MainWindow : public QMainWindow
         void initSpaceship();
         void initAudio();
         void initScore();
-        void initBarrier();
         void play();
 
 };

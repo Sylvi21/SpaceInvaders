@@ -15,8 +15,6 @@ class AlienBullet : public QObject, public QGraphicsPixmapItem{
         void move();
         void checkForCollision();
         void remove();
-        signals:
-            void bullsEye(AlienBullet *alienBullet);
 };
 
 #endif // ALIENBULLET_H

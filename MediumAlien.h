@@ -7,11 +7,15 @@ class MediumAlien : public Alien {
     private:
         int id;
         int shotDamage;
+        int points;
 
     public:
         MediumAlien();
         MediumAlien(int id, QPixmap pixmap);
         int getWidth(){return 46;}
+        void dying();
+        signals:
+            void goodbye(int alienId);
 };
 
 #endif // MEDIUMALIEN_H

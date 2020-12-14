@@ -10,5 +10,7 @@
         <file>sound/shoot.mp3</file>
         <file>img/ms-orb.png</file>
         <file>img/shield-orb.png</file>
+        <file>img/yellow-alien.png</file>
+        <file>img/cyan-alien.png</file>
     </qresource>
 </RCC>

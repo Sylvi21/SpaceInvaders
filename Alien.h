@@ -6,27 +6,18 @@ class Alien : public QObject, public QGraphicsPixmapItem {
         Q_OBJECT
     private:
         int id;
-        int height;
-        int width;
-        int xCoordinate;
-        int yCoordinate;
-
+        int shotDamage;
+        int points;
     public:
         Alien();
-        Alien(int id, int xCoordinate, int yCoordinate, QPixmap pixmap);
-
+        Alien(int id, QPixmap pixmap);
+        int getWidth(){return 50;}
         int getId(){return this->id;}
         void setId(int id);
-        int getHeight(){return this->height;}
-        int getWidth(){return this->width;}
-        int getXCoordinate(){return this->xCoordinate;}
-        void setXCoordinate(int xCoordinate){this->xCoordinate = xCoordinate;}
-        int getYCoordinate(){return this->yCoordinate;};
-        void setYCoordinate(int yCoordinate){this->yCoordinate = yCoordinate;}
+        int getPoints();
         void dying();
-        void remove();
         signals:
-            void goodbye(int alienId);
+            void goodbye(Alien *alien);
 };
 
 #endif // ALIEN_H

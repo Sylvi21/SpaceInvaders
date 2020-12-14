@@ -12,9 +12,14 @@ CONFIG += c++11
 SOURCES += \
     Alien.cpp \
     AlienBullet.cpp \
-    AlienFlock.cpp \
     Barrier.cpp \
+    EasyAlien.cpp \
+    EasyLevel.cpp \
+    HardAlien.cpp \
+    HardLevel.cpp \
     Level.cpp \
+    MediumAlien.cpp \
+    MediumLevel.cpp \
     MultishootBuff.cpp \
     Score.cpp \
     ShieldBuff.cpp \
@@ -26,10 +31,15 @@ SOURCES += \
 HEADERS += \
     Alien.h \
     AlienBullet.h \
-    AlienFlock.h \
     Barrier.h \
+    EasyAlien.h \
+    EasyLevel.h \
+    HardAlien.h \
+    HardLevel.h \
     Level.h \
     LevelState.h \
+    MediumAlien.h \
+    MediumLevel.h \
     MultishootBuff.h \
     Score.h \
     ShieldBuff.h \

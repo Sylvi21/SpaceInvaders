@@ -10,15 +10,8 @@
 
 class AlienBullet : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
-    private:
-        int xCoordinate;
     public:
-        signals:
-            void bullsEye(AlienBullet *alienBullet);
-    public:
-        AlienBullet(int xCoordinate, QPixmap bulletImg);
-        void setXCoordinate(int xCoordinate){this->xCoordinate = xCoordinate;};
-        int getXCoordinate(){return xCoordinate;};
+        AlienBullet(QPixmap bulletImg);
         void move();
         void checkForCollision();
         void remove();

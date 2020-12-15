@@ -8,12 +8,13 @@ class EasyAlien : public Alien {
         int id;
         int shotDamage;
         int points;
-
+        AnimationState state;
     public:
         EasyAlien();
         EasyAlien(int id);
         int getWidth(){return 34;}
         void dying();
+        void animate();
         signals:
             void goodbye(int alienId);
 };

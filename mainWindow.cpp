@@ -61,8 +61,8 @@ void MainWindow::play()
 {
     currentLevel = new EasyLevel(spaceship, scene);
     currentLevel->play();
-    QTimer *alienFlockTimer = new QTimer(this);
-    connect(alienFlockTimer,&QTimer::timeout,[=](){
+    QTimer *mainTimer = new QTimer(this);
+    connect(mainTimer,&QTimer::timeout,[=](){
         if (currentLevel->getState() == LevelState::WON)
         {
             delete currentLevel;
@@ -78,6 +78,11 @@ void MainWindow::play()
                 currentLevel->play();
            }
         }
+        if (currentLevel->getState() == LevelState::FAILED){
+            mainTimer->stop();
+            delete currentLevel;
+            //TODO show end window with points
+        }
     });
-    alienFlockTimer->start(1000);
+    mainTimer->start(1000);
 }

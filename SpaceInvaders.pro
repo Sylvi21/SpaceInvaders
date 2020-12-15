@@ -31,6 +31,7 @@ SOURCES += \
 HEADERS += \
     Alien.h \
     AlienBullet.h \
+    AnimationState.h \
     Barrier.h \
     EasyAlien.h \
     EasyLevel.h \

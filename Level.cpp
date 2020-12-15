@@ -23,11 +23,11 @@ void Level::initAliens()
 
         for(int j=0; j< COLS; j++){
             if(i == 0)
-                alien = new HardAlien(i*COLS+j, pixmap);
+                alien = new HardAlien(i*COLS+j);
             else if(i == 1 || i == 2)
-                alien = new MediumAlien(i*COLS+j, pixmap);
+                alien = new MediumAlien(i*COLS+j);
             else
-                alien = new EasyAlien(i*COLS+j, pixmap);
+                alien = new EasyAlien(i*COLS+j);
             connect(alien,&Alien::goodbye,this,&Level::alienShot);
             alien->setPos(j*70, i*60);
             flock.push_back(alien);

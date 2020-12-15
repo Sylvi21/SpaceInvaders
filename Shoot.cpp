@@ -6,9 +6,8 @@
 Shoot::Shoot(int x)
 {
    this->xCoordinate = x;
-
    setPixmap(QPixmap(":/img/shoot.png"));
-   setPos(this->xCoordinate, 500);
+   setPos(this->xCoordinate, 700);
 }
 
 
@@ -16,7 +15,7 @@ void Shoot::move(){
     QTimer *shootTimer = new QTimer(this);
     connect(shootTimer,&QTimer::timeout,[=](){
         if(this->y() > 0){
-            setPos(QPointF(getXCoordinate(), this->y()-1));
+             setPos(QPointF(getXCoordinate(), this->y()-1));
             checkForCollision();
         } else{
             delete this;
@@ -42,3 +41,4 @@ void Shoot::checkForCollision(){
         }
     }
 }
+

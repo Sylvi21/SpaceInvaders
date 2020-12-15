@@ -12,5 +12,6 @@
         <file>img/shield-orb.png</file>
         <file>img/yellow-alien.png</file>
         <file>img/cyan-alien.png</file>
+        <file>img/shield.png</file>
     </qresource>
 </RCC>

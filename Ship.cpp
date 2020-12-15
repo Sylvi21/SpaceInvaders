@@ -1,14 +1,13 @@
 #include "Ship.h"
 #include "Shoot.h"
+#include "Shield.h"
 #include <QKeyEvent>
 #include <QGraphicsScene>
-#include <QMediaPlayer>
-
-
+#include <QTimer>
 
 Ship::Ship(){
-    this->xCoordinate = 390;
-    health = 3;
+    this->xCoordinate = 590;
+    health = 5;
     weapon = 0;
     ammo = 0;
 }
@@ -19,13 +18,11 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
     {
         setPos(x()-30,y());
         this->xCoordinate=xCoordinate-30;
-
     }
-    else if (reaction->key() == Qt::Key_Right&&x()+80<800)
+    else if (reaction->key() == Qt::Key_Right&&x()+80<1200)
     {
         setPos(x()+30,y());
         this->xCoordinate=xCoordinate+30;
-
     }
     else if(reaction->key() == Qt::Key_Space&&weapon==0)
     {
@@ -68,5 +65,19 @@ void Ship::changeWeapon(){
 }
 
 void Ship::addShield(){
-      //  scene()->addItem(shield);
+        Shield *shield = new Shield(this->getXCoordinate());
+        scene()->addItem(shield);
+        QTimer *shieldTimer = new QTimer(this);
+        connect(shieldTimer,&QTimer::timeout,[=](){
+            shield->decreaseDuration();
+            if(shield->getDuration()>0)
+            {
+                shield->setXCoordinate(xCoordinate-35);
+                shield->setPos(xCoordinate-35, 720);
+
+            }
+
+            });
+        shieldTimer->start(1);
 }
+

@@ -29,7 +29,7 @@ void MultishootBuff::checkForCollision(){
         Ship *ship= dynamic_cast<Ship *>(item);
         if (ship)
         {
-           // ship->changeWeapon();
+            ship->changeWeapon();
             delete this;
         }
     }

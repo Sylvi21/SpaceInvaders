@@ -4,11 +4,13 @@
 #include <QGraphicsScene>
 #include <QMediaPlayer>
 
+
+
 Ship::Ship(){
     this->xCoordinate = 390;
     health = 3;
     weapon = 0;
-    shield = 0;
+    ammo = 0;
 }
 
 void Ship::keyPressEvent(QKeyEvent *reaction)
@@ -33,6 +35,8 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
     }
     else if(reaction->key() == Qt::Key_Space&&weapon==1)
     {
+        if (ammo>0)
+        {
         Shoot *shoot = new Shoot(this->getXCoordinate());
         Shoot *shoot2 = new Shoot(this->getXCoordinate()+30);
         Shoot *shoot3 = new Shoot(this->getXCoordinate()-30);
@@ -42,6 +46,9 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
         shoot2->move();
         scene()->addItem(shoot3);
         shoot3->move();
+        ammo--;
+        }
+        else if (ammo == 0) weapon=0;
     }
 
 }
@@ -57,8 +64,9 @@ void Ship::decreaseHealth(){
 
 void Ship::changeWeapon(){
         weapon = 1;
+        ammo = ammo+5;
 }
 
 void Ship::addShield(){
-
+      //  scene()->addItem(shield);
 }

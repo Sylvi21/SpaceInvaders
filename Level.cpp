@@ -11,15 +11,6 @@ Level::Level(Ship *spaceship, QGraphicsScene *scene){
 void Level::initAliens()
 {
     for(int i=0; i< ROWS; i++){
-        QPixmap pixmap;
-        if(i == 0)
-            pixmap = QPixmap(":/img/cyan-alien.png");
-                else if(i == 1 || i == 2)
-            pixmap = QPixmap(":/img/green-alien.png");
-        else
-            pixmap = QPixmap(":/img/yellow-alien.png");
-
-
         for(int j=0; j< COLS; j++){
             if(i == 0){
                 HardAlien *alien = new HardAlien(i*COLS+j);
@@ -45,7 +36,6 @@ void Level::initAliens()
         }
     }
     int width = 50;
-    int height = 34;
     this->leftBorder = 0;
     this->rightBorder = COLS*width+(COLS-1)*(70-width);
 }
@@ -74,8 +64,10 @@ void Level::play(){
     levelTimer = new QTimer(this);
     connect(levelTimer,&QTimer::timeout,[=](){
         moveAliens();
-        if (checkAlienCollisionWithShip())
+        if (checkAlienCollisionWithShip()){
+            levelTimer->stop();
             setState(LevelState::FAILED);
+        }
     });
     levelTimer->start(timerInterval);
 }
@@ -94,7 +86,7 @@ void Level::moveAliens()
             dir = 20;
             descend = 5;
             if(flock.size() < 15)
-                descend = 20;
+                descend = 35;
         }
 
         for (Alien *alien : flock){

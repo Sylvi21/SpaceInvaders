@@ -18,7 +18,7 @@ class Alien : public QObject, public QGraphicsPixmapItem {
         void setId(int id);
         int getPoints();
         void dying();
-        void animate();
+        virtual void animate();
         signals:
             void goodbye(Alien *alien);
 };

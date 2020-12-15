@@ -12,7 +12,7 @@ private:
     int xCoordinate;
     int health;
     int weapon;
-    int shield;
+    int ammo;
 public:
     Ship();
 public:

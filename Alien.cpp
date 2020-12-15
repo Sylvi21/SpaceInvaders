@@ -14,6 +14,4 @@ void Alien::dying(){
 }
 
 void Alien::animate(){
-    QTextStream out(stdout);
-  //  out<<"hello from the animate"<<Qt::endl;
 }

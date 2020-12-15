@@ -12,7 +12,6 @@ void Level::initAliens()
 {
     for(int i=0; i< ROWS; i++){
         QPixmap pixmap;
-        Alien* alien;
         if(i == 0)
             pixmap = QPixmap(":/img/cyan-alien.png");
                 else if(i == 1 || i == 2)
@@ -22,16 +21,27 @@ void Level::initAliens()
 
 
         for(int j=0; j< COLS; j++){
-            if(i == 0)
-                alien = new HardAlien(i*COLS+j, pixmap);
-            else if(i == 1 || i == 2)
-                alien = new MediumAlien(i*COLS+j, pixmap);
-            else
-                alien = new EasyAlien(i*COLS+j, pixmap);
+            if(i == 0){
+                HardAlien *alien = new HardAlien(i*COLS+j);
+                connect(alien,&Alien::goodbye,this,&Level::alienShot);
+                alien->setPos(j*70, i*60);
+                flock.push_back(alien);
+                scene->addItem(alien);
+            }
+            else if(i == 1 || i == 2){
+                MediumAlien *alien = new MediumAlien(i*COLS+j);
+                connect(alien,&Alien::goodbye,this,&Level::alienShot);
+                alien->setPos(j*70, i*60);
+                flock.push_back(alien);
+                scene->addItem(alien);
+            }
+            else {
+                EasyAlien *alien = new EasyAlien(i*COLS+j);
             connect(alien,&Alien::goodbye,this,&Level::alienShot);
             alien->setPos(j*70, i*60);
             flock.push_back(alien);
             scene->addItem(alien);
+            }
         }
     }
     int width = 50;
@@ -61,15 +71,13 @@ void Level::play(){
     QTextStream out(stdout);
     setState(LevelState::RUNNING);
     attack();
-    QTimer *levelTimer = new QTimer(this);
+    levelTimer = new QTimer(this);
     connect(levelTimer,&QTimer::timeout,[=](){
-        QTextStream out(stdout);
-        out<<"Loopie levelie"<<Qt::endl;
         moveAliens();
-        out<<flock.isEmpty()<<Qt::endl;
-
+        if (checkAlienCollisionWithShip())
+            setState(LevelState::FAILED);
     });
-    levelTimer->start(600);
+    levelTimer->start(timerInterval);
 }
 
 void Level::moveAliens()
@@ -77,14 +85,24 @@ void Level::moveAliens()
         QTextStream out(stdout);
         int maxLeft = 800, maxRight = 0;
         int counter = 0;
-        if(getRightBorder()+20 > scene->width()-30)
+        if(getRightBorder()+20 > scene->width()-30){
             dir=-20;
-        if (getLeftBorder()-20 < 30)
+            if(flock.size() < 15)
+                descend = 10;
+        }
+        if (getLeftBorder()-20 < 30){
             dir = 20;
+            descend = 5;
+            if(flock.size() < 15)
+                descend = 20;
+        }
+
         for (Alien *alien : flock){
             if(alien != NULL){
                 alien->setX(alien->x()+dir);
-                alien->setPos(QPointF(alien->x(), alien->y()));
+                alien->animate();
+
+                alien->setPos(QPointF(alien->x(), alien->y()+descend));
 
                 if(alien->x() < maxLeft)
                 {
@@ -99,6 +117,7 @@ void Level::moveAliens()
         }
         setRightBorder(maxRight);
         setLeftBorder(maxLeft);
+        descend = 0;
 }
 
 void Level::attack()
@@ -138,9 +157,27 @@ void Level::alienShot(Alien *alien){
             generateBuffs((*it)->x(), (*it)->y());
             delete (*it);
             flock.erase(it);
+            if(flock.size() < 10){
+                timerInterval *= 0.75;
+                levelTimer->setInterval(timerInterval);
+            }
             if(flock.empty())
                 setState(LevelState::WON);
             return;
         }
     }
+}
+
+bool Level::checkAlienCollisionWithShip(){
+    QList<QGraphicsItem *> collidingItems = ship->collidingItems() ;
+
+    foreach(QGraphicsItem *item, collidingItems)
+    {
+        Alien *alien= dynamic_cast<Alien *>(item);
+        if (alien)
+        {
+            return true;
+        }
+    }
+    return false;
 }

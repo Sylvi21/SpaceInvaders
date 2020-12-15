@@ -20,13 +20,15 @@ private:
     QGraphicsScene *scene;
     Ship *ship;
     QList<Alien*> flock;
-    QTimer *timer;
+    QTimer *levelTimer;
     LevelState state;
     const int COLS = 8;
     const int ROWS = 5;
     int leftBorder = 800;
     int rightBorder = 0;
     int dir = 20;
+    int descend = 0;
+    int timerInterval = 400;
 public slots:
     void alienShot(Alien *alien);
 public:
@@ -43,6 +45,7 @@ public:
     void moveAliens();
     void generateBuffs(int x, int y);
     void attack();
+    bool checkAlienCollisionWithShip();
 };
 
 #endif // LEVEL_H

@@ -11,6 +11,7 @@ Ship::Ship(){
     this->xCoordinate = 590;
     health = 3;
     weapon = 0;
+    reload = 0;
     ammo = 0;
     shieldMode = 0;
     shieldDuration = 0;
@@ -30,14 +31,28 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
         this->xCoordinate=xCoordinate+30;
 
     }
-    else if(reaction->key() == Qt::Key_Space&&weapon==0)
+    else if(reaction->key() == Qt::Key_Space&&weapon==0&&reload==0)
     {
+        reload = 1;
+        QTimer *reloadTimer = new QTimer();
+        connect(reloadTimer,&QTimer::timeout,[=](){
+        reload = 0;
+        reloadTimer->stop();
+        });
+        reloadTimer->start(500);
         Shoot *shoot = new Shoot(this->getXCoordinate());
         scene()->addItem(shoot);
         shoot->move();
     }
-    else if(reaction->key() == Qt::Key_Space&&weapon==1)
+    else if(reaction->key() == Qt::Key_Space&&weapon==1&&reload==0)
     {
+        reload = 1;
+        QTimer *reloadTimer = new QTimer();
+        connect(reloadTimer,&QTimer::timeout,[=](){
+        reload = 0;
+        reloadTimer->stop();
+        });
+        reloadTimer->start(500);
         if (ammo>0)
         {
         Shoot *shoot = new Shoot(this->getXCoordinate());
@@ -69,6 +84,8 @@ void Ship::changeWeapon(){
         weapon = 1;
         ammo = ammo+5;
 }
+
+
 
 void Ship::addShield(){
        if(shieldMode == 0)

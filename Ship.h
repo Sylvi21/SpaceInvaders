@@ -12,6 +12,7 @@ private:
     int xCoordinate;
     int health;
     int weapon;
+    int reload;
     int ammo;
     int shieldMode;
     int shieldDuration;

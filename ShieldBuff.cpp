@@ -29,7 +29,7 @@ void ShieldBuff::checkForCollision(){
         Ship *ship= dynamic_cast<Ship *>(item);
         if (ship)
         {
-           // ship->addShield();
+            ship->addShield();
             delete this;
         }
     }

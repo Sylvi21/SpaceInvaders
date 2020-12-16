@@ -13,6 +13,8 @@ private:
     int health;
     int weapon;
     int ammo;
+    int shieldMode;
+    int shieldDuration;
 public:
     Ship();
 public:
@@ -22,6 +24,7 @@ public:
     void decreaseHealth();
     void changeWeapon();
     void addShield();
+    int shieldStatus();
 };
 
 #endif // SHIP_H

@@ -8,7 +8,7 @@ Shoot::Shoot(int x)
    this->xCoordinate = x;
 
    setPixmap(QPixmap(":/img/shoot.png"));
-   setPos(this->xCoordinate, 500);
+   setPos(this->xCoordinate, 720);
 }
 
 

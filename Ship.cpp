@@ -3,14 +3,17 @@
 #include <QKeyEvent>
 #include <QGraphicsScene>
 #include <QMediaPlayer>
+#include <QTimer>
 
 
 
 Ship::Ship(){
-    this->xCoordinate = 390;
+    this->xCoordinate = 590;
     health = 3;
     weapon = 0;
     ammo = 0;
+    shieldMode = 0;
+    shieldDuration = 0;
 }
 
 void Ship::keyPressEvent(QKeyEvent *reaction)
@@ -21,7 +24,7 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
         this->xCoordinate=xCoordinate-30;
 
     }
-    else if (reaction->key() == Qt::Key_Right&&x()+80<800)
+    else if (reaction->key() == Qt::Key_Right&&x()+80<1200)
     {
         setPos(x()+30,y());
         this->xCoordinate=xCoordinate+30;
@@ -68,5 +71,32 @@ void Ship::changeWeapon(){
 }
 
 void Ship::addShield(){
-      //  scene()->addItem(shield);
+       if(shieldMode == 0)
+       {
+       shieldDuration = shieldDuration + 3000;
+       setPixmap(QPixmap(":/img/shield.png"));
+       shieldMode=1;
+       QTimer *shieldTimer = new QTimer();
+       connect(shieldTimer,&QTimer::timeout,[=](){
+       shieldDuration = shieldDuration - 1000;
+       if(shieldDuration == 0)
+       {
+       shieldTimer->stop();
+       setPixmap(QPixmap(":/img/spaceship.png"));
+       shieldMode = 0;
+       }
+       });
+       shieldTimer->start(1000);
+       }
+       else if(shieldMode == 1)
+       {
+           shieldDuration = shieldDuration + 3000;
+       }
 }
+
+int Ship::shieldStatus(){
+return shieldMode;
+}
+
+
+

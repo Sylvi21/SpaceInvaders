@@ -1,7 +1,6 @@
 #include "Alien.h"
 #include "AlienBullet.h"
 #include <QTextStream>
-
 Alien::Alien() {
 }
 

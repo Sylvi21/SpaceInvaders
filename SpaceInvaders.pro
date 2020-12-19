@@ -21,7 +21,6 @@ SOURCES += \
     MediumAlien.cpp \
     MediumLevel.cpp \
     MultishootBuff.cpp \
-    Score.cpp \
     ShieldBuff.cpp \
     Ship.cpp \
     Shoot.cpp \
@@ -42,7 +41,6 @@ HEADERS += \
     MediumAlien.h \
     MediumLevel.h \
     MultishootBuff.h \
-    Score.h \
     ShieldBuff.h \
     Ship.h \
     Shoot.h \

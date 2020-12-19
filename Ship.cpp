@@ -6,7 +6,6 @@
 #include <QTimer>
 
 
-
 Ship::Ship(){
     this->xCoordinate = 590;
     health = 3;
@@ -34,12 +33,7 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
     else if(reaction->key() == Qt::Key_Space&&weapon==0&&reload==0)
     {
         reload = 1;
-        QTimer *reloadTimer = new QTimer();
-        connect(reloadTimer,&QTimer::timeout,[=](){
-        reload = 0;
-        reloadTimer->stop();
-        });
-        reloadTimer->start(500);
+        reloadWeapon();
         Shoot *shoot = new Shoot(this->getXCoordinate());
         scene()->addItem(shoot);
         shoot->move();
@@ -47,12 +41,7 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
     else if(reaction->key() == Qt::Key_Space&&weapon==1&&reload==0)
     {
         reload = 1;
-        QTimer *reloadTimer = new QTimer();
-        connect(reloadTimer,&QTimer::timeout,[=](){
-        reload = 0;
-        reloadTimer->stop();
-        });
-        reloadTimer->start(500);
+        reloadWeapon();
         if (ammo>0)
         {
         Shoot *shoot = new Shoot(this->getXCoordinate());
@@ -75,8 +64,13 @@ void Ship::decreaseHealth(){
     health--;
         if(health==0)
         {
-            delete this;
+            setPos(0,0);
+            setPixmap(QPixmap(":/img/gameover.png"));
         }
+}
+
+int Ship::showHealth(){
+return health;
 }
 
 
@@ -90,12 +84,12 @@ void Ship::changeWeapon(){
 void Ship::addShield(){
        if(shieldMode == 0)
        {
-       shieldDuration = shieldDuration + 3000;
+       shieldDuration = shieldDuration+1;
        setPixmap(QPixmap(":/img/shield.png"));
        shieldMode=1;
        QTimer *shieldTimer = new QTimer();
        connect(shieldTimer,&QTimer::timeout,[=](){
-       shieldDuration = shieldDuration - 1000;
+       shieldDuration--;
        if(shieldDuration == 0)
        {
        shieldTimer->stop();
@@ -103,11 +97,11 @@ void Ship::addShield(){
        shieldMode = 0;
        }
        });
-       shieldTimer->start(1000);
+       shieldTimer->start(3000);
        }
        else if(shieldMode == 1)
        {
-           shieldDuration = shieldDuration + 3000;
+           shieldDuration++;
        }
 }
 
@@ -115,5 +109,11 @@ int Ship::shieldStatus(){
 return shieldMode;
 }
 
-
-
+void Ship::reloadWeapon(){
+    QTimer *reloadTimer = new QTimer();
+    connect(reloadTimer,&QTimer::timeout,[=](){
+    reload = 0;
+    reloadTimer->stop();
+    });
+    reloadTimer->start(500);
+}

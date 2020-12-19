@@ -16,5 +16,6 @@
         <file>img/cyan-alien-up.png</file>
         <file>img/green-alien-up.png</file>
         <file>img/shield.png</file>
+        <file>img/gameover.png</file>
     </qresource>
 </RCC>

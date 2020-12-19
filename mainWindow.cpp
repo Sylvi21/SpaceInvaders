@@ -1,5 +1,5 @@
 #include "mainWindow.h"
-
+#include <QFont>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     initScene();
     initSpaceship();
     initAudio();
-    initScore();
 
     ui->graphicsView->setScene(scene);
     play();
@@ -50,13 +49,6 @@ void MainWindow::initAudio()
 }
 
 
-void MainWindow::initScore()
-{
-    score = new Score();
-    scene->addItem(score);
-    //score->checkForScore();
-}
-
 void MainWindow::play()
 {
     currentLevel = new EasyLevel(spaceship, scene);
@@ -86,3 +78,4 @@ void MainWindow::play()
     });
     mainTimer->start(1000);
 }
+

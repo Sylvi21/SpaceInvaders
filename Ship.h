@@ -26,6 +26,8 @@ public:
     void changeWeapon();
     void addShield();
     int shieldStatus();
+    void reloadWeapon();
+    int showHealth();
 };
 
 #endif // SHIP_H

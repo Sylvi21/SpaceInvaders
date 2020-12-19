@@ -1,8 +1,7 @@
-#include "Shoot.h"
 #include <QTimer>
-#include "mainWindow.h"
 #include "Alien.h"
 #include "Barrier.h"
+#include "Shoot.h"
 Shoot::Shoot(int x)
 {
    this->xCoordinate = x;

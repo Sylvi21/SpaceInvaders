@@ -5,7 +5,6 @@
 #include "ui_mainWindow.h"
 #include "Ship.h"
 #include "AlienBullet.h"
-#include "Score.h"
 #include "Barrier.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -30,7 +29,6 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         QGraphicsScene *scene;
         Ship *spaceship;
-        Score *score;
         Level *currentLevel;
         int levelNumber = 0;
     public:
@@ -39,8 +37,8 @@ class MainWindow : public QMainWindow
         void initScene();
         void initSpaceship();
         void initAudio();
-        void initScore();
         void play();
+        void displayMainMenu();
 
 };
 #endif // MAINWINDOW_H

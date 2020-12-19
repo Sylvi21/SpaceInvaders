@@ -3,7 +3,6 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-#include "Score.h"
 
 class Shoot: public QObject, public QGraphicsPixmapItem
 {

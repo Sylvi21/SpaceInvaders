@@ -16,6 +16,7 @@
 #include "EasyLevel.h"
 #include "MediumLevel.h"
 #include "HardLevel.h"
+#include "Score.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,6 +31,7 @@ class MainWindow : public QMainWindow
         QGraphicsScene *scene;
         Ship *spaceship;
         Level *currentLevel;
+        Score *score;
         int levelNumber = 0;
     public:
         MainWindow(QWidget *parent = nullptr);
@@ -39,6 +41,9 @@ class MainWindow : public QMainWindow
         void initAudio();
         void play();
         void displayMainMenu();
+        void initScore();
+public slots:
+    int setScore();
 
 };
 #endif // MAINWINDOW_H

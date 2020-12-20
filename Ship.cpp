@@ -4,7 +4,8 @@
 #include <QGraphicsScene>
 #include <QMediaPlayer>
 #include <QTimer>
-
+#include <QMessageBox>
+#include <QPushButton>
 
 Ship::Ship(){
     this->xCoordinate = 590;
@@ -64,8 +65,19 @@ void Ship::decreaseHealth(){
     health--;
         if(health==0)
         {
-            setPos(0,0);
-            setPixmap(QPixmap(":/img/gameover.png"));
+            QMessageBox message;
+            message.setWindowTitle("Space Invaders");
+            message.setText("Game over");
+            message.setInformativeText("Thanks for playing, if you want you can play again in sandbox mode");
+            QPushButton *sandbox = message.addButton(QMessageBox::Ok);
+            if (message.clickedButton() == sandbox) {
+                message.close();
+            }
+            else if(message.clickedButton() != sandbox)
+            {
+
+            }
+            message.exec();
         }
 }
 

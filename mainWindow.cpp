@@ -1,5 +1,6 @@
 #include "mainWindow.h"
-#include <QFont>
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -13,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     initScene();
     initSpaceship();
     initAudio();
+    initScore();
 
     ui->graphicsView->setScene(scene);
     play();
@@ -38,6 +40,7 @@ void MainWindow::initSpaceship()
     spaceship->setFlag(QGraphicsItem::ItemIsFocusable);
     spaceship->setFocus();
     scene->addItem(spaceship);
+
 }
 
 void MainWindow::initAudio()
@@ -48,6 +51,19 @@ void MainWindow::initAudio()
     music->play();
 }
 
+int MainWindow::setScore()
+{
+score=score+10;
+return 0;
+}
+
+void MainWindow::initScore()
+{
+        score = new Score();
+       // connect(score,&Score::increaseScore,this,MainWindow::setScore());
+        scene->addItem(score);
+
+}
 
 void MainWindow::play()
 {

@@ -9,6 +9,18 @@ EasyLevel::EasyLevel(Ship *spaceship, QGraphicsScene *scene) :
     initBarrier();
 }
 
+EasyLevel::~EasyLevel()
+{
+    if(barrier){
+        barrier = nullptr;
+        delete barrier;
+    }
+    if(barrier2){
+        barrier2 = nullptr;
+        delete barrier2;
+    }
+}
+
 void EasyLevel::initBarrier()
 {
     barrier = new Barrier();

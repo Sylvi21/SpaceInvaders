@@ -30,14 +30,9 @@ void AlienBullet::checkForCollision(){
         {
             if(ship->shieldStatus()==0)
             {
-            ship->decreaseHealth();
-            delete this;
+                ship->decreaseHealth();
             }
-            else
-            {
             delete this;
-            }
-
         }
 
         if(barrier)

@@ -17,7 +17,7 @@ void Shoot::move(){
         if(this->y() > 0){
             setPos(QPointF(getXCoordinate(), this->y()-1));
             checkForCollision();
-        } else{
+        } else {
             delete this;
         }
     });
@@ -35,7 +35,7 @@ void Shoot::checkForCollision(){
             alien->dying();
             delete this;
         }
-        if(barrier)
+        if (barrier)
         {
             delete this;
         }

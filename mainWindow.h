@@ -30,7 +30,7 @@ class MainWindow : public QMainWindow
         QGraphicsScene *scene;
         Ship *spaceship;
         Level *currentLevel;
-        int levelNumber = 0;
+        int levelNumber;
     public:
         MainWindow(QWidget *parent = nullptr);
         ~MainWindow();

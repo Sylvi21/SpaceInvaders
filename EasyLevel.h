@@ -25,6 +25,7 @@ private:
     void initBarriers();
     public:
         EasyLevel(Ship *spaceship, QGraphicsScene *scene);
+        ~EasyLevel();
 };
 
 #endif // FIRSTLEVEL_H

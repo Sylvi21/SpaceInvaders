@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+    this->levelNumber = 1;
     initScene();
     initSpaceship();
     initAudio();
@@ -59,16 +60,22 @@ void MainWindow::play()
         {
             delete currentLevel;
             levelNumber++;
-            if(levelNumber == 1 || levelNumber == 2){
+            if (levelNumber == 1 || levelNumber == 2)
+            {
+                initSpaceship();
                 currentLevel = new EasyLevel(spaceship, scene);
                 currentLevel->play();
-            } else if (levelNumber == 3 || levelNumber == 4){
+            } else if (levelNumber == 3 || levelNumber == 4)
+            {
+                initSpaceship();
                 currentLevel = new MediumLevel(spaceship, scene);
                 currentLevel->play();
-            } else {
+            } else
+            {
+                initSpaceship();
                 currentLevel = new HardLevel(spaceship, scene);
                 currentLevel->play();
-           }
+            }
         }
         if (currentLevel->getState() == LevelState::FAILED){
             mainTimer->stop();

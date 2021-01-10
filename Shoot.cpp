@@ -2,8 +2,6 @@
 #include "Alien.h"
 #include "Barrier.h"
 #include "Shoot.h"
-#include "Score.h"
-
 Shoot::Shoot(int x)
 {
    this->xCoordinate = x;
@@ -34,8 +32,6 @@ void Shoot::checkForCollision(){
         Barrier *barrier = dynamic_cast<Barrier *>(item);
         if (alien)
         {
-            Score *score = new Score();
-            score->increaseScore();
             alien->dying();
             delete this;
         }

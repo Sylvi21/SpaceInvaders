@@ -6,7 +6,6 @@
         <file>img/spaceship.png</file>
         <file>img/ab.png</file>
         <file>img/background.png</file>
-        <file>img/barrier.png</file>
         <file>sound/shoot.mp3</file>
         <file>img/ms-orb.png</file>
         <file>img/shield-orb.png</file>
@@ -17,5 +16,16 @@
         <file>img/green-alien-up.png</file>
         <file>img/shield.png</file>
         <file>img/gameover.png</file>
+        <file>img/barrier1.png</file>
+        <file>img/barrier2.png</file>
+        <file>img/barrier3.png</file>
+        <file>img/barrier4.png</file>
+        <file>img/barrier5.png</file>
+        <file>img/shield1.png</file>
+        <file>img/shield2.png</file>
+        <file>img/shield3.png</file>
+        <file>img/spaceship1.png</file>
+        <file>img/spaceship2.png</file>
+        <file>img/spaceship3.png</file>
     </qresource>
 </RCC>

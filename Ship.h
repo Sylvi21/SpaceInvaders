@@ -11,6 +11,7 @@ class Ship:public QObject, public QGraphicsPixmapItem{
 private:
     int xCoordinate;
     int health;
+    int life;
     int weapon;
     int reload;
     int ammo;
@@ -28,6 +29,8 @@ public:
     int shieldStatus();
     void reloadWeapon();
     int showHealth();
+    int showLife();
+
 };
 
 #endif // SHIP_H

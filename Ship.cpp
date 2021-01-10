@@ -9,6 +9,7 @@
 
 Ship::Ship(){
     this->xCoordinate = 590;
+    life =3;
     health = 3;
     weapon = 0;
     reload = 0;
@@ -65,6 +66,13 @@ void Ship::decreaseHealth(){
     health--;
         if(health==0)
         {
+            life--;
+            if(life==2)setPixmap(QPixmap(":/img/spaceship2.png"));
+            else if(life==1)setPixmap(QPixmap(":/img/spaceship1.png"));
+            health=3;
+            if (life==0)
+            {
+            setPixmap(QPixmap(":/img/spaceship.png"));
             QMessageBox message;
             message.setWindowTitle("Space Invaders");
             message.setText("Game over");
@@ -80,11 +88,11 @@ void Ship::decreaseHealth(){
             message.exec();
         }
 }
+}
 
 int Ship::showHealth(){
 return health;
 }
-
 
 void Ship::changeWeapon(){
         weapon = 1;
@@ -97,7 +105,10 @@ void Ship::addShield(){
        if(shieldMode == 0)
        {
        shieldDuration = shieldDuration+1;
-       setPixmap(QPixmap(":/img/shield.png"));
+       if(life==3)setPixmap(QPixmap(":/img/shield3.png"));
+       else if(life==2)setPixmap(QPixmap(":/img/shield2.png"));
+       else if(life==1)setPixmap(QPixmap(":/img/shield1.png"));
+       else setPixmap(QPixmap(":/img/shield.png"));
        shieldMode=1;
        QTimer *shieldTimer = new QTimer();
        connect(shieldTimer,&QTimer::timeout,[=](){
@@ -105,7 +116,10 @@ void Ship::addShield(){
        if(shieldDuration == 0)
        {
        shieldTimer->stop();
-       setPixmap(QPixmap(":/img/spaceship.png"));
+       if(life==3)setPixmap(QPixmap(":/img/spaceship3.png"));
+       else if(life==2)setPixmap(QPixmap(":/img/spaceship2.png"));
+       else if(life==1)setPixmap(QPixmap(":/img/spaceship1.png"));
+       else setPixmap(QPixmap(":/img/spaceship.png"));
        shieldMode = 0;
        }
        });

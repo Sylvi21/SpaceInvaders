@@ -6,6 +6,11 @@ Level::Level(Ship *spaceship, QGraphicsScene *scene){
     this->setState(LevelState::PREPARING);
     this->ship = spaceship;
     this->scene = scene;
+    this->leftBorder = 800;
+    this->rightBorder = 0;
+    this->dir = 20;
+    this->descend = 0;
+    this->timerInterval = 400;
 }
 
 void Level::initAliens()
@@ -28,10 +33,10 @@ void Level::initAliens()
             }
             else {
                 EasyAlien *alien = new EasyAlien(i*COLS+j);
-            connect(alien,&Alien::goodbye,this,&Level::alienShot);
-            alien->setPos(j*70, i*60);
-            flock.push_back(alien);
-            scene->addItem(alien);
+                connect(alien,&Alien::goodbye,this,&Level::alienShot);
+                alien->setPos(j*70, i*60);
+                flock.push_back(alien);
+                scene->addItem(alien);
             }
         }
     }
@@ -47,6 +52,7 @@ Level::~Level(){
             delete alien;
        }
        flock.clear();
+       scene->clear();
 }
 
 void Level::setState(LevelState state){
@@ -126,7 +132,7 @@ void Level::attack()
             alienBullet->move();
         }
     });
-    alienFlockShootTimer->start(600);
+    alienFlockShootTimer->start(800);
 }
 
 void Level::generateBuffs(int x, int y){

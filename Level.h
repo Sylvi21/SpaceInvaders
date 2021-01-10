@@ -24,11 +24,11 @@ private:
     LevelState state;
     const int COLS = 8;
     const int ROWS = 5;
-    int leftBorder = 800;
-    int rightBorder = 0;
-    int dir = 20;
-    int descend = 0;
-    int timerInterval = 400;
+    int leftBorder;
+    int rightBorder;
+    int dir;
+    int descend;
+    int timerInterval;
 public slots:
     void alienShot(Alien *alien);
 public:

@@ -2,6 +2,7 @@
 #define ALIENBULLET_H
 #include "Alien.h"
 #include "Ship.h"
+#include "Barrier.h"
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QPixmap>

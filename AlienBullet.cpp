@@ -1,6 +1,5 @@
 #include "AlienBullet.h"
-#include "Ship.h"
-#include "Barrier.h"
+
 AlienBullet::AlienBullet(QPixmap bulletImg){
     setPixmap(bulletImg);
 };

@@ -6,7 +6,6 @@
         <file>img/spaceship.png</file>
         <file>img/ab.png</file>
         <file>img/background.png</file>
-        <file>sound/shoot.mp3</file>
         <file>img/ms-orb.png</file>
         <file>img/shield-orb.png</file>
         <file>img/yellow-alien.png</file>
@@ -27,5 +26,7 @@
         <file>img/spaceship1.png</file>
         <file>img/spaceship2.png</file>
         <file>img/spaceship3.png</file>
+        <file>sound/alien-shot.wav</file>
+        <file>sound/ship-shot.wav</file>
     </qresource>
 </RCC>

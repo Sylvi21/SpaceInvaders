@@ -7,11 +7,15 @@
 #include <QGraphicsScene>
 #include <QPixmap>
 #include <QTimer>
+#include <QSound>
 
 class AlienBullet : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
+    private:
+        QTimer *bulletTimer;
     public:
         AlienBullet(QPixmap bulletImg);
+        ~AlienBullet();
         void move();
         void checkForCollision();
         void remove();

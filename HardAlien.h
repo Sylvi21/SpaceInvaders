@@ -3,7 +3,7 @@
 #include "Alien.h"
 
 class HardAlien : public Alien {
-        Q_OBJECT
+    Q_OBJECT
     private:
         int id;
         int shotDamage;

@@ -1,8 +1,4 @@
 #include "Score.h"
-#include <QFont>
-#include <QGraphicsTextItem>
-#include "Shoot.h"
-#include <QDebug>
 
 Score::Score(){
     setPlainText(QString("Score: ") + QString::number(score));

@@ -21,6 +21,7 @@ private:
     Ship *ship;
     QList<Alien*> flock;
     QTimer *levelTimer;
+    QTimer *alienFlockShootTimer;
     LevelState state;
     const int COLS = 8;
     const int ROWS = 5;

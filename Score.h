@@ -2,6 +2,11 @@
 #define SCORE_H
 #include <QObject>
 #include <QGraphicsTextItem>
+#include <QFont>
+#include <QGraphicsTextItem>
+#include <QDebug>
+#include "Shoot.h"
+
 class Score: public QGraphicsTextItem
 {
     Q_OBJECT

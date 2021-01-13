@@ -18,6 +18,11 @@ Ship::Ship(){
     shieldDuration = 0;
 }
 
+Ship::~Ship(){
+    delete reloadTimer;
+    reloadTimer = NULL;
+}
+
 void Ship::keyPressEvent(QKeyEvent *reaction)
 {
     if(reaction->key() == Qt::Key_Left&&x()-20>0)
@@ -38,6 +43,7 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
         reloadWeapon();
         Shoot *shoot = new Shoot(this->getXCoordinate());
         scene()->addItem(shoot);
+        QSound::play(":/sound/ship-shot.wav");
         shoot->move();
     }
     else if(reaction->key() == Qt::Key_Space&&weapon==1&&reload==0)
@@ -49,6 +55,7 @@ void Ship::keyPressEvent(QKeyEvent *reaction)
         Shoot *shoot = new Shoot(this->getXCoordinate());
         Shoot *shoot2 = new Shoot(this->getXCoordinate()+30);
         Shoot *shoot3 = new Shoot(this->getXCoordinate()-30);
+        QSound::play(":/sound/ship-shot.wav");
         scene()->addItem(shoot);
         shoot->move();
         scene()->addItem(shoot2);
@@ -136,7 +143,7 @@ return shieldMode;
 }
 
 void Ship::reloadWeapon(){
-    QTimer *reloadTimer = new QTimer();
+    reloadTimer = new QTimer();
     connect(reloadTimer,&QTimer::timeout,[=](){
     reload = 0;
     reloadTimer->stop();

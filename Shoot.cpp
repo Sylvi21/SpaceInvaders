@@ -1,7 +1,5 @@
-#include <QTimer>
-#include "Alien.h"
-#include "Barrier.h"
 #include "Shoot.h"
+#include <QDebug>
 Shoot::Shoot(int x)
 {
    this->xCoordinate = x;
@@ -10,9 +8,15 @@ Shoot::Shoot(int x)
    setPos(this->xCoordinate, 720);
 }
 
+Shoot::~Shoot()
+{
+    delete shootTimer;
+    shootTimer = NULL;
+}
 
 void Shoot::move(){
-    QTimer *shootTimer = new QTimer(this);
+    QSound::play(":/sound/alien-shot.wav");
+    shootTimer = new QTimer(this);
     connect(shootTimer,&QTimer::timeout,[=](){
         if(this->y() > 0){
             setPos(QPointF(getXCoordinate(), this->y()-1));
@@ -32,6 +36,7 @@ void Shoot::checkForCollision(){
         Barrier *barrier = dynamic_cast<Barrier *>(item);
         if (alien)
         {
+            shootTimer->stop();
             alien->dying();
             delete this;
         }

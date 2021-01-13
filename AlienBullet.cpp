@@ -1,12 +1,16 @@
 #include "AlienBullet.h"
-#include "Ship.h"
-#include "Barrier.h"
+
 AlienBullet::AlienBullet(QPixmap bulletImg){
     setPixmap(bulletImg);
 };
 
+AlienBullet::~AlienBullet(){
+    bulletTimer = nullptr;
+    delete bulletTimer;
+}
 void AlienBullet::move(){
-    QTimer *bulletTimer = new QTimer(this);
+    QSound::play(":/sound/alien-shot.wav");
+    bulletTimer = new QTimer(this);
     connect(bulletTimer,&QTimer::timeout,[=](){
         if(this->y() < scene()->height()){
             setPos(QPointF(this->x(), this->y()+1));
@@ -41,8 +45,4 @@ void AlienBullet::checkForCollision(){
             delete this;
         }
     }
-}
-
-void AlienBullet::remove(){
-    delete this;
 }

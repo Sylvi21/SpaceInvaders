@@ -1,11 +1,18 @@
 #include "mainWindow.h"
 #include <QFont>
+#include <QMovie>
+#include <QLabel>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/img/background.png")));
+
+
+    QMovie *myMovie = new QMovie(":/img/background_scrolling.gif");
+    QLabel* movieLabel = new QLabel(this);
+    movieLabel->setMovie(myMovie);
+    myMovie->start();
     setFixedSize(1200,800);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

@@ -53,6 +53,10 @@ Level::~Level(){
        }
        flock.clear();
        scene->clear();
+       levelTimer = nullptr;
+       delete levelTimer;
+       alienFlockShootTimer = nullptr;
+       delete alienFlockShootTimer;
 }
 
 void Level::setState(LevelState state){
@@ -120,7 +124,7 @@ void Level::moveAliens()
 
 void Level::attack()
 {
-    QTimer *alienFlockShootTimer = new QTimer(this);
+    alienFlockShootTimer = new QTimer(this);
     alienFlockShootTimer = new QTimer(this);
     connect(alienFlockShootTimer,&QTimer::timeout,[=](){
         if(!flock.empty()){
@@ -154,6 +158,7 @@ void Level::alienShot(Alien *alien){
         if((*it) == alien){
             generateBuffs((*it)->x(), (*it)->y());
             delete (*it);
+            (*it) = NULL;
             flock.erase(it);
             if(flock.size() < 10){
                 timerInterval *= 0.75;
@@ -171,7 +176,7 @@ bool Level::checkAlienCollisionWithShip(){
 
     foreach(QGraphicsItem *item, collidingItems)
     {
-        Alien *alien= dynamic_cast<Alien *>(item);
+        Alien *alien = dynamic_cast<Alien *>(item);
         if (alien)
         {
             return true;

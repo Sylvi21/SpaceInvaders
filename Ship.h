@@ -4,7 +4,14 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
-
+#include <QSound>
+#include <QKeyEvent>
+#include <QGraphicsScene>
+#include <QMediaPlayer>
+#include <QTimer>
+#include <QMessageBox>
+#include <QPushButton>
+#include "Shoot.h"
 
 class Ship:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -17,9 +24,10 @@ private:
     int ammo;
     int shieldMode;
     int shieldDuration;
+    QTimer *reloadTimer;
 public:
     Ship();
-public:
+    ~Ship();
     int getXCoordinate(){return this->xCoordinate;}
     void setXCoordinate(int xCoordinate){this->xCoordinate = xCoordinate;}
     void keyPressEvent(QKeyEvent *move);

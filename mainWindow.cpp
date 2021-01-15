@@ -2,6 +2,7 @@
 #include <QFont>
 #include <QMovie>
 #include <QLabel>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

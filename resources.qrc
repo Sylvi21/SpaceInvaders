@@ -14,7 +14,6 @@
         <file>img/cyan-alien-up.png</file>
         <file>img/green-alien-up.png</file>
         <file>img/shield.png</file>
-        <file>img/gameover.png</file>
         <file>img/barrier1.png</file>
         <file>img/barrier2.png</file>
         <file>img/barrier3.png</file>
@@ -28,5 +27,6 @@
         <file>img/spaceship3.png</file>
         <file>sound/alien-shot.wav</file>
         <file>sound/ship-shot.wav</file>
+        <file>img/start.jpg</file>
     </qresource>
 </RCC>

@@ -25,6 +25,7 @@ SOURCES += \
     ShieldBuff.cpp \
     Ship.cpp \
     Shoot.cpp \
+    StartWindow.cpp \
     main.cpp \
     mainWindow.cpp
 
@@ -46,9 +47,11 @@ HEADERS += \
     ShieldBuff.h \
     Ship.h \
     Shoot.h \
+    StartWindow.h \
     mainWindow.h
 
 FORMS += \
+    StartWindow.ui \
     mainWindow.ui
 
 # Default rules for deployment.

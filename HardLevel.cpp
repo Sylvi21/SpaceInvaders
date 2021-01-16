@@ -146,7 +146,7 @@ void HardLevel::alienShot(Alien *alien){
             (*it) = NULL;
             flock.erase(it);
             if(flock.size() < 15){
-                timerInterval *= 0.9;
+                timerInterval *= 0.8;
                 levelTimer->setInterval(timerInterval);
             }
             if(flock.empty()){
@@ -171,6 +171,7 @@ bool HardLevel::checkIfUfoHit(){
 
     foreach(QGraphicsItem *item, collidingItems)
     {
+        QSound::play(":/sound/boss-hit.wav");
         Shoot *bullet = dynamic_cast<Shoot *>(item);
         if (bullet)
         {

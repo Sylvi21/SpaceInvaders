@@ -29,5 +29,11 @@
         <file>sound/ship-shot.wav</file>
         <file>img/start.jpg</file>
         <file>img/ufo.png</file>
+        <file>sound/alien-hit.wav</file>
+        <file>sound/ship-hit.wav</file>
+        <file>sound/barrier-hit.wav</file>
+        <file>sound/boss-hit.wav</file>
+        <file>sound/mus-buff.wav</file>
+        <file>sound/shield-buff.wav</file>
     </qresource>
 </RCC>

@@ -151,13 +151,28 @@ void Level::generateBuffs(int x, int y){
 
 bool Level::checkAlienCollisionWithShip(){
     QList<QGraphicsItem *> collidingItems = ship->collidingItems() ;
-    if(!collidingItems.empty())
+    foreach(QGraphicsItem *item, collidingItems)
     {
-        QGraphicsItem *item = collidingItems.front();
         Alien *alien = dynamic_cast<Alien *>(item);
+        MultishootBuff *msBuff = dynamic_cast<MultishootBuff *>(item);
+        ShieldBuff *shieldBuff = dynamic_cast<ShieldBuff *>(item);
         if (alien)
         {
             return true;
+        }
+        if (msBuff){
+            QSound::play(":/sound/mus-buff.wav");
+            ship->changeWeapon();
+            delete msBuff;
+            msBuff = nullptr;
+            return false;
+        }
+        if (shieldBuff){
+            QSound::play(":/sound/shield-buff.wav");
+            ship->addShield();
+            delete shieldBuff;
+            shieldBuff = nullptr;
+            return false;
         }
     }
     return false;

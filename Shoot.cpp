@@ -38,6 +38,7 @@ void Shoot::checkForCollision(){
         BossAlien *boss = dynamic_cast<BossAlien*>(item);
         if (alien)
         {
+            QSound::play(":/sound/alien-hit.wav");
             shootTimer->stop();
             alien->dying();
             delete this;
@@ -49,7 +50,7 @@ void Shoot::checkForCollision(){
         if (boss)
         {
             boss->decreaseHP();
-            scene()->removeItem(this);
+            delete this;
         }
     }
 }

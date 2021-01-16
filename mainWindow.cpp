@@ -52,7 +52,7 @@ void MainWindow::initSpaceship()
 void MainWindow::initAudio()
 {
     music = new QMediaPlayer();
-    music->setMedia(QUrl("qrc:/sound/music.mp3"));
+    music->setMedia(QUrl(":/sound/music.mp3"));
     music->setVolume(20);
     music->play();
 }

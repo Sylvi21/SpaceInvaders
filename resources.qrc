@@ -28,5 +28,6 @@
         <file>sound/alien-shot.wav</file>
         <file>sound/ship-shot.wav</file>
         <file>img/start.jpg</file>
+        <file>img/ufo.png</file>
     </qresource>
 </RCC>

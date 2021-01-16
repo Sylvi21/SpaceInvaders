@@ -22,10 +22,10 @@ void ShieldBuff::move(){
 }
 
 void ShieldBuff::checkForCollision(){
-    QList<QGraphicsItem *> collidingItems = this->collidingItems() ;
-
-    foreach(QGraphicsItem *item, collidingItems)
+    QList<QGraphicsItem *> collidingItems = this->collidingItems();
+    if(!collidingItems.empty())
     {
+        QGraphicsItem *item = collidingItems.front();
         Ship *ship= dynamic_cast<Ship *>(item);
         if (ship)
         {

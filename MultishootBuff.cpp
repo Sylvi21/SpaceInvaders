@@ -8,7 +8,8 @@ MultishootBuff::MultishootBuff(int x, int y){
 
 MultishootBuff::~MultishootBuff(){}
 
-void MultishootBuff::move(){
+void MultishootBuff::move()
+{
     QTimer *shieldTimer = new QTimer(this);
     connect(shieldTimer,&QTimer::timeout,[=](){
         if(this->y() < scene()->height()){
@@ -21,11 +22,12 @@ void MultishootBuff::move(){
     shieldTimer->start(5);
 }
 
-void MultishootBuff::checkForCollision(){
-    QList<QGraphicsItem *> collidingItems = this->collidingItems() ;
-
-    foreach(QGraphicsItem *item, collidingItems)
+void MultishootBuff::checkForCollision()
+{
+    QList<QGraphicsItem *> collidingItems = this->collidingItems();
+    if(!collidingItems.empty())
     {
+        QGraphicsItem *item = collidingItems.front();
         Ship *ship= dynamic_cast<Ship *>(item);
         if (ship)
         {

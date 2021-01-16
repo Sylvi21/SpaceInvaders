@@ -7,6 +7,7 @@
 #include <QSound>
 #include "Alien.h"
 #include "Barrier.h"
+#include "BossAlien.h"
 
 class Shoot: public QObject, public QGraphicsPixmapItem
 {

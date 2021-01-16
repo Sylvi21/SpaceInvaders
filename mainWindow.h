@@ -30,6 +30,8 @@ class MainWindow : public QMainWindow
         QGraphicsScene *scene;
         Ship *spaceship;
         Level *currentLevel;
+        QMediaPlayer *music;
+        QTimer *mainTimer;
         int levelNumber;
     public:
         MainWindow(QWidget *parent = nullptr);

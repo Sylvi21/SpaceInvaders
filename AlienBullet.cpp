@@ -5,9 +5,10 @@ AlienBullet::AlienBullet(QPixmap bulletImg){
 };
 
 AlienBullet::~AlienBullet(){
-    bulletTimer = nullptr;
     delete bulletTimer;
+    bulletTimer = nullptr;
 }
+
 void AlienBullet::move(){
     QSound::play(":/sound/alien-shot.wav");
     bulletTimer = new QTimer(this);
@@ -23,10 +24,10 @@ void AlienBullet::move(){
 }
 
 void AlienBullet::checkForCollision(){
-    QList<QGraphicsItem *> collidingItems = this->collidingItems() ;
-
-    foreach(QGraphicsItem *item, collidingItems)
+    QList<QGraphicsItem *> collidingItems = this->collidingItems();
+    if(!collidingItems.empty())
     {
+        QGraphicsItem *item = collidingItems.front();
         Ship *ship= dynamic_cast<Ship *>(item);
         Barrier *barrier= dynamic_cast<Barrier *>(item);
 

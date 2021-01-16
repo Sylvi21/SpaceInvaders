@@ -5,6 +5,7 @@
 enum class LevelState {
     PREPARING,
     RUNNING,
+    BOSSTIME,
     WON,
     FAILED,
 };

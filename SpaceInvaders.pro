@@ -13,6 +13,7 @@ SOURCES += \
     Alien.cpp \
     AlienBullet.cpp \
     Barrier.cpp \
+    BossAlien.cpp \
     EasyAlien.cpp \
     EasyLevel.cpp \
     HardAlien.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     AlienBullet.h \
     AnimationState.h \
     Barrier.h \
+    BossAlien.h \
     EasyAlien.h \
     EasyLevel.h \
     HardAlien.h \

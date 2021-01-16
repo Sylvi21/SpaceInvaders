@@ -8,12 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-
-    QMovie *myMovie = new QMovie(":/img/background_scrolling.gif");
-    QLabel* movieLabel = new QLabel(this);
-    movieLabel->setMovie(myMovie);
-    myMovie->start();
+    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/img/background.png")));
     setFixedSize(1200,800);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -30,6 +25,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete music;
+    delete scene;
+    delete spaceship;
+    delete currentLevel;
+    currentLevel = nullptr;
     delete ui;
 }
 
@@ -51,7 +51,7 @@ void MainWindow::initSpaceship()
 
 void MainWindow::initAudio()
 {
-    QMediaPlayer * music = new QMediaPlayer();
+    music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sound/music.mp3"));
     music->setVolume(20);
     music->play();
@@ -62,7 +62,7 @@ void MainWindow::play()
 {
     currentLevel = new EasyLevel(spaceship, scene);
     currentLevel->play();
-    QTimer *mainTimer = new QTimer(this);
+    mainTimer = new QTimer(this);
     connect(mainTimer,&QTimer::timeout,[=](){
         if (currentLevel->getState() == LevelState::WON)
         {
@@ -88,7 +88,6 @@ void MainWindow::play()
         if (currentLevel->getState() == LevelState::FAILED){
             mainTimer->stop();
             delete currentLevel;
-            //TODO show end window with points
         }
     });
     mainTimer->start(1000);

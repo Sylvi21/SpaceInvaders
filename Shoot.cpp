@@ -30,10 +30,12 @@ void Shoot::move(){
 
 void Shoot::checkForCollision(){
     QList<QGraphicsItem *> collidingItems = this->collidingItems();
-    foreach(QGraphicsItem *item, collidingItems)
+    if(!collidingItems.empty())
     {
+        QGraphicsItem *item = collidingItems.front();
         Alien *alien = dynamic_cast<Alien *>(item);
         Barrier *barrier = dynamic_cast<Barrier *>(item);
+        BossAlien *boss = dynamic_cast<BossAlien*>(item);
         if (alien)
         {
             shootTimer->stop();
@@ -43,6 +45,11 @@ void Shoot::checkForCollision(){
         if (barrier)
         {
             delete this;
+        }
+        if (boss)
+        {
+            boss->decreaseHP();
+            scene()->removeItem(this);
         }
     }
 }

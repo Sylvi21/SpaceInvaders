@@ -20,18 +20,18 @@ private:
     QGraphicsScene *scene;
     Ship *ship;
     QList<Alien*> flock;
-    QTimer *levelTimer;
     QTimer *alienFlockShootTimer;
+    QTimer *levelTimer;
     LevelState state;
+    int timerInterval;
     const int COLS = 8;
     const int ROWS = 5;
     int leftBorder;
     int rightBorder;
     int dir;
     int descend;
-    int timerInterval;
 public slots:
-    void alienShot(Alien *alien);
+    virtual void alienShot(Alien *alien);
 public:
     Level(Ship *spaceship, QGraphicsScene *scene);
     ~Level();
@@ -42,11 +42,14 @@ public:
     int getRightBorder(){return rightBorder;}
     void setRightBorder(int rightBorder){this->rightBorder = rightBorder;}
     void initAliens();
-    void play();
+    void start();
     void moveAliens();
     void generateBuffs(int x, int y);
     void attack();
     bool checkAlienCollisionWithShip();
+    virtual void play() = 0;
 };
 
 #endif // LEVEL_H
+
+

@@ -1,6 +1,7 @@
 #ifndef FIRSTLEVEL_H
 #define FIRSTLEVEL_H
 #include <QList>
+#include <QGraphicsScene>
 #include "Level.h"
 #include "Ship.h"
 #include "Alien.h"
@@ -12,7 +13,8 @@ private:
     QGraphicsScene *scene;
     Ship *ship;
     QList<Alien*> flock;
-    QTimer *timer;
+    QTimer *levelTimer;
+    QTimer *alienFlockShootTimer;
     LevelState state;
     Barrier *barrier;
     Barrier *barrier2;
@@ -20,12 +22,19 @@ private:
     const int ROWS = 5;
     int leftBorder = 800;
     int rightBorder = 0;
+    int timerInterval;
+    int dir;
+    int descend;
+    void moveAliens();
+    void initAliens();
     void initBarrier();
-    void createAliens();
-    void initBarriers();
-    public:
-        EasyLevel(Ship *spaceship, QGraphicsScene *scene);
-        ~EasyLevel();
+    void attack();
+public slots:
+    void alienShot(Alien *alien);
+public:
+    EasyLevel(Ship *spaceship, QGraphicsScene *scene);
+    ~EasyLevel();
+    void play();
 };
 
 #endif // FIRSTLEVEL_H

@@ -11,12 +11,11 @@ class ShieldBuff : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
     private:
         QPixmap image;
+        QTimer *shieldTimer;
     public:
         ShieldBuff(int x, int y);
         ~ShieldBuff();
-
         void move();
-        void checkForCollision();
 };
 
 #endif // SHIELDBUFF_H

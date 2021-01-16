@@ -11,12 +11,11 @@ class MultishootBuff : public QObject, public QGraphicsPixmapItem{
        Q_OBJECT
        private:
            QPixmap image;
+           QTimer *msTimer;
        public:
            MultishootBuff(int x, int y);
            ~MultishootBuff();
-
            void move();
-           void checkForCollision();
 };
 
 #endif // MULTISHOOTBUFF_H

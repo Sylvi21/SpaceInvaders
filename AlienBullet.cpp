@@ -33,6 +33,7 @@ void AlienBullet::checkForCollision(){
 
         if (ship)
         {
+            QSound::play(":/sound/barrier-hit.wav");
             if(ship->shieldStatus()==0)
             {
                 ship->decreaseHealth();
@@ -42,6 +43,7 @@ void AlienBullet::checkForCollision(){
 
         if(barrier)
         {
+            QSound::play(":/sound/ship-hit.wav");
             barrier->decreaseDurability();
             delete this;
         }

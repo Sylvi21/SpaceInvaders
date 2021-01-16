@@ -4,35 +4,22 @@ MultishootBuff::MultishootBuff(int x, int y){
     this->setX(x);
     this->setY(y);
     setPixmap(QPixmap(":/img/ms-orb.png"));
+    this->msTimer = NULL;
 }
 
-MultishootBuff::~MultishootBuff(){}
+MultishootBuff::~MultishootBuff(){
+    delete msTimer;
+}
 
 void MultishootBuff::move()
 {
-    QTimer *shieldTimer = new QTimer(this);
-    connect(shieldTimer,&QTimer::timeout,[=](){
-        if(this->y() < scene()->height()){
+    msTimer = new QTimer(this);
+    connect(msTimer,&QTimer::timeout,[=](){
+        if(y() < 800){
             setPos(QPointF(this->x(), this->y()+1));
-            checkForCollision();
         } else{
             delete this;
         }
     });
-    shieldTimer->start(5);
-}
-
-void MultishootBuff::checkForCollision()
-{
-    QList<QGraphicsItem *> collidingItems = this->collidingItems();
-    if(!collidingItems.empty())
-    {
-        QGraphicsItem *item = collidingItems.front();
-        Ship *ship= dynamic_cast<Ship *>(item);
-        if (ship)
-        {
-            ship->changeWeapon();
-            delete this;
-        }
-    }
+    msTimer->start(5);
 }

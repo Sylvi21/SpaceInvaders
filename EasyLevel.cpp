@@ -94,14 +94,15 @@ void EasyLevel::moveAliens()
         int counter = 0;
         if(getRightBorder()+20 > scene->width()-30){
             dir=-20;
+            descend = 5;
             if(flock.size() < 15)
-                descend = 10;
+                descend = 25;
         }
         if (getLeftBorder()-20 < 30){
             dir = 20;
             descend = 5;
             if(flock.size() < 15)
-                descend = 35;
+                descend = 25;
         }
 
         for (Alien *alien : flock){
@@ -153,7 +154,7 @@ void EasyLevel::alienShot(Alien *alien){
             (*it) = NULL;
             flock.erase(it);
             if(flock.size() < 10){
-                timerInterval *= 0.75;
+                timerInterval *= 0.8;
                 levelTimer->setInterval(timerInterval);
             }
             if(flock.empty())
